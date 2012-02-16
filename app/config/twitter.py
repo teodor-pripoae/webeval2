@@ -1,4 +1,0 @@
-# twitter oauth config
-
-CONSUMER_KEY = 'SSmKAr35XvwZbHYn2k1A'
-CONSUMER_SECRET = 'NHmp1DL89AwX9W7hcZ3EDM73Iw56obGDiiUytmmwE'
