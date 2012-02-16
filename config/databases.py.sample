@@ -1,0 +1,21 @@
+import os
+
+DEVELOPMENT = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        #'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'db', 'dev.sqlite3')
+        'NAME': 'webeval',
+        'USER': 'root',
+        'PASSWORD': ''
+    }
+}
+
+PRODUCTION = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'webeval',
+        'USER': 'root',
+        'PASSWORD': '',
+    }
+}
