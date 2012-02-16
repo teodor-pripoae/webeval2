@@ -1,0 +1,84 @@
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides:          Startup daemon for sma workers
+# Required-Start:    networking
+# Required-Stop:     networking
+# Default-Start:     2 3 4 5
+# Default-Stop:      S 0 1 6
+# Short-Description: Start sma worker
+### END INIT INFO
+#
+# Author:  Teodor Pripoae
+#          <teodor.pripoae AT gmail.com>.
+#
+# Version: @(#)sma-worker 0.1 26-Jan-2012 teodor.pripoae AT gmail.com
+#
+
+#### SERVER SPECIFIC CONFIGURATION
+
+SMA_USER=sma4
+WORKER_PATH=/home/$SMA_USER/sma/worker
+LOG_FILE_PATH=$WORKER_PATH/log/daemon.pid
+RUN_AS=$SMA_USER
+
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+DESC="SMA worker"
+NAME=$0
+SCRIPTNAME=/etc/init.d/$NAME
+
+#
+#       Function that starts the daemon/service.
+#
+d_start()
+{
+    if [ -f $LOG_FILE_PATH ]; then
+        echo -n " already running"
+    else
+        start-stop-daemon --start --quiet \
+                   --pidfile $LOG_FILE_PATH \
+                   --chuid $RUN_AS --exec $WORKER_PATH/run_daemon.sh
+        chmod 400 $LOG_FILE_PATH
+    fi
+}
+
+#
+#       Function that stops the daemon/service.
+#
+d_stop() {
+    echo -n ", $SITE"
+    start-stop-daemon --stop --quiet --pidfile $LOG_FILE_PATH \
+                      || echo -n " not running"
+    if [ -f $LOG_FILE_PATH ]; then
+       rm $LOG_FILE_PATH
+    fi
+}
+
+ACTION="$1"
+case "$ACTION" in
+    start)
+        echo -n "Starting $DESC: $NAME"
+        d_start
+        echo "."
+        ;;
+
+    stop)
+        echo -n "Stopping $DESC: $NAME"
+        d_stop
+        echo "."
+        ;;
+
+    restart|force-reload)
+        echo -n "Restarting $DESC: $NAME"
+        d_stop
+        sleep 1
+        d_start
+        echo "."
+        ;;
+
+    *)
+        echo "Usage: $NAME {start|stop|restart|force-reload}" >&2
+        exit 3
+        ;;
+esac
+
+exit 0
