@@ -138,35 +138,10 @@ TEMPLATE_DIRS = (
 )
 
 
-from config import akismet, reCaptcha
-from config import facebook as facebook_config
-from config import gmail as gmail_config
-from config import twitter as twitter_config
-
 CUSTOM_USER_MODEL = 'webEval.web_eval__core.user__model.UserProfile'
-
-AKISMET_API_KEY = akismet.AKISMET_API_KEY
-RECAPTCHA_PUBLIC_KEY = reCaptcha.RECAPTCHA_PUBLIC_KEY
-RECAPTCHA_PRIVATE_KEY = reCaptcha.RECAPTCHA_PRIVATE_KEY
-
-EMAIL_USE_TLS = gmail_config.EMAIL_USE_TLS
-EMAIL_HOST = gmail_config.EMAIL_HOST
-EMAIL_HOST_USER = gmail_config.EMAIL_HOST_USER
-EMAIL_HOST_PASSWORD = gmail_config.EMAIL_HOST_PASSWORD
-EMAIL_PORT = gmail_config.EMAIL_PORT
-
-FACEBOOK_APP_ID = facebook_config.FACEBOOK_APP_ID
-FACEBOOK_API_KEY =  facebook_config.FACEBOOK_API_KEY
-FACEBOOK_API_SECRET = facebook_config.FACEBOOK_API_SECRET
-FACEBOOK_REDIRECT_URI = facebook_config.FACEBOOK_REDIRECT_URI
-
-CONSUMER_KEY = twitter_config.CONSUMER_KEY
-CONSUMER_SECRET = twitter_config.CONSUMER_SECRET
 
 OAUTH_AUTH_VIEW = "piston.authentication.oauth_auth_view"
 OAUTH_CALLBACK_VIEW = "piston.authentication.oauth_user_auth"
-
-GEOIP_PATH = '/home/toni/kits/geoip'
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
