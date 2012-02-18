@@ -27,7 +27,7 @@
 	{% endif %}
 	<h2>Panel</h2>
 	<ul class="blog_sidebar_ul">
-		<li><a href="{% url new_blog_entry %}">Post new blog entry</a></li>
+		<li><a href="{% url new_entry %}">Post new blog entry</a></li>
 		<li><a href="{% url blog_posts username=request.user.username %}">My blog</a></li>
 	</ul>
 	{% endif %}

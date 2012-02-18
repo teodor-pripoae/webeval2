@@ -22,7 +22,7 @@ urlpatterns = patterns('',
     url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
     url(r'^favicon.ico$', 'django.views.generic.simple.redirect_to', {'url': '%s/images/favicon.ico' % settings.MEDIA_URL}),
 
-    url(r'^blog/new-entry/$', 'app.controllers.blog_controller.new_entry', name="new_blog_entry"),
+    url(r'^blog/new-entry/$', 'app.controllers.blog_controller.new_entry', name="new_entry"),
     url(r'^blog/comments/posted/$', 'app.controllers.blog_controller.comment_posted', name="comment_posted"),
     url(r'^blog/comments/', include('django.contrib.comments.urls')),
     url(r"^blog/delete_comment/(\d+)/$", "app.controllers.blog_controller.delete_comment", name="delete_blog_comment"),

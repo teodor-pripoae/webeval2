@@ -2,10 +2,7 @@ import datetime
 import hashlib
 import re
 
-from annoying.functions import get_object_or_None
-from annoying.decorators import render_to
-
-from django.http import HttpResponseRedirect, Http404, HttpResponse
+from django.http import Http404, HttpResponse
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth import login as auth_login
@@ -19,15 +16,19 @@ from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import resolve
 from django.db.models import Q
 from django.template import RequestContext, Context
-from django.shortcuts import get_object_or_404, render_to_response
+from django.shortcuts import get_object_or_404, render_to_response, redirect
 from django.views.decorators.csrf import csrf_protect
+
+from annoying.functions import get_object_or_None
+from annoying.decorators import render_to
 
 from app.helpers.auth import user_auth
 from app.models import *
+from app.forms import *
 from app.controllers.utils_controller import redirect_to_index
 
 
-@render_to('blog/list_entries.html')
+@render_to('blog/index.html')
 def index (request, username = None):
     username = get_object_or_None(UserProfile, username = username)
     if username is not None:
@@ -55,6 +56,7 @@ def index (request, username = None):
 
 
 @csrf_protect
+@render_to('blog/show.html')
 def display_entry (request, username, permalink):
     user = user_auth(request)
     username = get_object_or_404(UserProfile, username = username)
@@ -64,21 +66,19 @@ def display_entry (request, username, permalink):
     can_manage_dashboard = user is not None and (user.has_perm('app.add_dashboardentry'))
     is_dashboard_entry = len(DashboardEntry.objects.filter(blog_entry = blog_entry)) > 0
 
-    return render_to_response('blog/display_entry.html',
-                              {'blog_entry' : blog_entry,
-                               'can_edit' : can_edit,
-                               'can_delete' : can_delete,
-                               'can_manage_dashboard' : can_manage_dashboard,
-                               'last_blog_entries' : BlogEntry.objects.filter(author = username).order_by('-date')[:10],
-                               'is_dashboard_entry' : is_dashboard_entry,
-                               'navigation' :
-                               {
-                                    'main' : 'blog',
-                                    'other' : 'display-blog-entry',
-                                    'author' : blog_entry.author,
-                               }
-                              },
-                              context_instance=RequestContext(request))
+    return {
+        'blog_entry' : blog_entry,
+       'can_edit' : can_edit,
+       'can_delete' : can_delete,
+       'can_manage_dashboard' : can_manage_dashboard,
+       'last_blog_entries' : BlogEntry.objects.filter(author = username).order_by('-date')[:10],
+       'is_dashboard_entry' : is_dashboard_entry,
+       'navigation' : {
+            'main' : 'blog',
+            'other' : 'display-blog-entry',
+            'author' : blog_entry.author,
+       }
+    }
 
 
 def update_tags (blog_entry, tags):
@@ -94,7 +94,9 @@ def update_tags (blog_entry, tags):
     blog_entry.save()
 
 
+
 @login_required
+@render_to('blog/new.html')
 def new_entry (request):
     user = user_auth(request)
 
@@ -109,26 +111,24 @@ def new_entry (request):
 
             blog_entry.permalink = blog_entry.get_permalink()
             blog_entry.save()
-            return HttpResponseRedirect(reverse("display_entry",
-                                                kwargs = {'username' : blog_entry.author.username,
-                                                          'permalink' : blog_entry.permalink,
-                                                         }
-                                                )
-                                       )
+            return redirect(reverse("display_entry",
+                                    kwargs = {'username' : blog_entry.author.username,
+                                              'permalink' : blog_entry.permalink,
+                                             }))
     else:
         form = BlogEntryCreateForm()
-    return render_to_response("blog/new_entry.html",
-                              {'form' : form,
-                               'navigation' :
-                               {
-                                    'main' : 'blog',
-                                    'other' : 'create-blog-post'
-                               }
-                              },
-                              context_instance=RequestContext(request))
+
+    return {'form' : form,
+        'navigation' :
+        {
+            'main' : 'blog',
+            'other' : 'create-blog-post'
+        }
+    }
 
 
 @login_required
+@render_to('blog/edit.html')
 def edit_entry (request, username, permalink):
     user = user_auth(request)
     username = get_object_or_404(UserProfile, username = username)
@@ -151,25 +151,20 @@ def edit_entry (request, username, permalink):
 
             update_tags (blog_entry, tags)
 
-            return HttpResponseRedirect(reverse("display_entry",
-                                                kwargs = {'username' : username.username,
-                                                          'permalink' : permalink,
-                                                         }
-                                                )
-                                       )
+            return redirect(reverse("display_entry",
+                                     kwargs = {'username' : username.username,
+                                               'permalink' : permalink,
+                                              }))
     else:
         form = BlogEntryEditForm(blog_entry)
 
-    return render_to_response('blog/edit_entry.html',
-                              {'form' : form,
-                               'blog_entry' : blog_entry,
-                               'navigation' : {
-                                    'main' : 'blog',
-                                    'other' : 'edit-entry'
-                                }
-                              },
-                              context_instance=RequestContext(request)
-                             )
+    return {'form' : form,
+        'blog_entry' : blog_entry,
+        'navigation' : {
+            'main' : 'blog',
+            'other' : 'edit-entry'
+        }
+    }
 
 
 
@@ -184,7 +179,7 @@ def delete_entry (request, username, permalink):
     blog_entry = get_object_or_404(BlogEntry, author = username, permalink = permalink)
     blog_entry.delete()
 
-    return HttpResponseRedirect(reverse('blog_posts'))
+    return redirect(reverse('blog_posts'))
 
 
 @login_required
@@ -199,7 +194,7 @@ def delete_comment(request, post_pk, pk=None):
 
         for pk in pklst:
             Comment.objects.get(pk=pk).delete()
-        return HttpResponseRedirect(reverse("display_entry",
+        return redirect(reverse("display_entry",
                                             kwargs={'username' : blog_entry.author.username,
                                                     'permalink' : blog_entry.permalink,
                                                    }
@@ -207,15 +202,14 @@ def delete_comment(request, post_pk, pk=None):
                                    )
 
 
+@render_to('blog/tag_search_results.html')
 def get_tags_ajax (request):
     if request.is_ajax():
         q = request.GET.get( 'q' )
         if q is not None:
             results = Tag.objects.filter(Q(name__contains = q)).order_by( 'name' )
-            return render_to_response('blog/tag_search_results.html',
-                                      {'results' : results},
-                                      context_instance = RequestContext(request),
-                                     )
+            return {'results' : results}
+    return {}
 
 
 @login_required
@@ -236,6 +230,7 @@ def add_tag_ajax (request):
 
             entry.tags.add(tag)
             return HttpResponse("Tag added.")
+
 
 
 def comment_posted (request):

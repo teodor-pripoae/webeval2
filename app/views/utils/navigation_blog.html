@@ -1,6 +1,6 @@
 {% if request.user.is_superuser %}
 <li class="first {% if navigation.other == "create-blog-post" %}active{% endif %}">
-	<a href="{% url new_blog_entry %}">
+	<a href="{% url new_entry %}">
 		New entry
 	</a>
 </li>
