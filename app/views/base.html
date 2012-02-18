@@ -16,6 +16,10 @@
           <ul class="nav">
             {% include "utils/navigation_top.html" %}
           </ul>
+
+          <ul class="nav pull-right">
+            <li><a href="{% url logout %}">Logout</a></li>
+          </ul>
         </div>
       </div>
 
@@ -30,7 +34,7 @@
         </div>
       </div>
 
-      <div class="span10">
+      <div class="span11">
       {% block content %}
       {% endblock %}
       </div>

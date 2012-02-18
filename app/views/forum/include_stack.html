@@ -1,8 +1,7 @@
-<div class="forum_history">
-    {% for board_now in stack reversed %}
-        {% if forloop.counter0  %}
-            >
-        {% endif %}
-        <a href = "{% url display_board board_id=board_now.id %}">{{ board_now.name }}</a>
-    {% endfor %}
-</div>
+<ul class="breadcrumb">
+  {% for board_now in stack reversed %}
+    <li>
+      <a href = "{% url display_board board_id=board_now.id %}">{{ board_now.name }}</a>
+    </li>
+  {% endfor %}
+</ul>

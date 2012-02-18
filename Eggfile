@@ -13,4 +13,11 @@ django-celery
 werkzeug
 django-annoying
 django-extensions
+<<<<<<< HEAD
 pyyaml
+=======
+django-simple-captcha
+django-nose
+pil
+simplejson
+>>>>>>> 6e133d11d73a5779f63f0c2a6885aa8412e26f1d

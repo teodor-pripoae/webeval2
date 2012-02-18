@@ -13,6 +13,7 @@ from settings import *
 from app.fields import ReCaptchaField
 from app.widgets import *
 from config.permissions import *
+from config.judge import *
 
 
 ################## BLOG ########################
@@ -330,7 +331,10 @@ class UserProfile(User):
         return self.username
 
     def ip_joined (self):
-        return self.wiki_page.wikirevision_set.all()[0].ip
+        try:
+            return self.wiki_page.wikirevision_set.all()[0].ip
+        except:
+            return "0.0.0.0"
 
     def valid_username (self):
         for char in self.username:

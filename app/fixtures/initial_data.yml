@@ -1,0 +1,892 @@
+- fields: {app_label: app, model: author, name: author}
+  model: contenttypes.contenttype
+  pk: 30
+- fields: {app_label: app, model: blogentry, name: blog entry}
+  model: contenttypes.contenttype
+  pk: 21
+- fields: {app_label: app, model: blogrollentry, name: blog roll entry}
+  model: contenttypes.contenttype
+  pk: 22
+- fields: {app_label: app, model: calendarentry, name: calendar entry}
+  model: contenttypes.contenttype
+  pk: 28
+- fields: {app_label: captcha, model: captchastore, name: captcha store}
+  model: contenttypes.contenttype
+  pk: 12
+- fields: {app_label: comments, model: comment, name: comment}
+  model: contenttypes.contenttype
+  pk: 7
+- fields: {app_label: comments, model: commentflag, name: comment flag}
+  model: contenttypes.contenttype
+  pk: 8
+- fields: {app_label: contenttypes, model: contenttype, name: content type}
+  model: contenttypes.contenttype
+  pk: 5
+- fields: {app_label: app, model: contest, name: contest}
+  model: contenttypes.contenttype
+  pk: 31
+- fields: {app_label: djcelery, model: crontabschedule, name: crontab}
+  model: contenttypes.contenttype
+  pk: 16
+- fields: {app_label: app, model: dashboardentry, name: dashboard entry}
+  model: contenttypes.contenttype
+  pk: 23
+- fields: {app_label: api, model: eval, name: eval}
+  model: contenttypes.contenttype
+  pk: 48
+- fields: {app_label: app, model: facebooksession, name: facebook session}
+  model: contenttypes.contenttype
+  pk: 47
+- fields: {app_label: app, model: forumboard, name: forum board}
+  model: contenttypes.contenttype
+  pk: 25
+- fields: {app_label: app, model: forumpost, name: forum post}
+  model: contenttypes.contenttype
+  pk: 27
+- fields: {app_label: app, model: forumtopic, name: forum topic}
+  model: contenttypes.contenttype
+  pk: 26
+- fields: {app_label: app, model: gradertest, name: grader test}
+  model: contenttypes.contenttype
+  pk: 35
+- fields: {app_label: auth, model: group, name: group}
+  model: contenttypes.contenttype
+  pk: 2
+- fields: {app_label: djcelery, model: intervalschedule, name: interval}
+  model: contenttypes.contenttype
+  pk: 15
+- fields: {app_label: app, model: job, name: job}
+  model: contenttypes.contenttype
+  pk: 33
+- fields: {app_label: admin, model: logentry, name: log entry}
+  model: contenttypes.contenttype
+  pk: 10
+- fields: {app_label: auth, model: message, name: message}
+  model: contenttypes.contenttype
+  pk: 4
+- fields: {app_label: south, model: migrationhistory, name: migration history}
+  model: contenttypes.contenttype
+  pk: 11
+- fields: {app_label: djcelery, model: periodictask, name: periodic task}
+  model: contenttypes.contenttype
+  pk: 18
+- fields: {app_label: djcelery, model: periodictasks, name: periodic tasks}
+  model: contenttypes.contenttype
+  pk: 17
+- fields: {app_label: auth, model: permission, name: permission}
+  model: contenttypes.contenttype
+  pk: 1
+- fields: {app_label: app, model: privatemessage, name: private message}
+  model: contenttypes.contenttype
+  pk: 29
+- fields: {app_label: app, model: problem, name: problem}
+  model: contenttypes.contenttype
+  pk: 32
+- fields: {app_label: app, model: ratingcache, name: rating cache}
+  model: contenttypes.contenttype
+  pk: 36
+- fields: {app_label: app, model: scorecache, name: score cache}
+  model: contenttypes.contenttype
+  pk: 37
+- fields: {app_label: app, model: scoreproblemcache, name: score problem cache}
+  model: contenttypes.contenttype
+  pk: 38
+- fields: {app_label: sessions, model: session, name: session}
+  model: contenttypes.contenttype
+  pk: 6
+- fields: {app_label: sites, model: site, name: site}
+  model: contenttypes.contenttype
+  pk: 9
+- fields: {app_label: app, model: tag, name: tag}
+  model: contenttypes.contenttype
+  pk: 24
+- fields: {app_label: djcelery, model: taskstate, name: task}
+  model: contenttypes.contenttype
+  pk: 20
+- fields: {app_label: djcelery, model: taskmeta, name: task meta}
+  model: contenttypes.contenttype
+  pk: 13
+- fields: {app_label: djcelery, model: tasksetmeta, name: taskset meta}
+  model: contenttypes.contenttype
+  pk: 14
+- fields: {app_label: app, model: test, name: test}
+  model: contenttypes.contenttype
+  pk: 34
+- fields: {app_label: app, model: ticket, name: ticket}
+  model: contenttypes.contenttype
+  pk: 45
+- fields: {app_label: app, model: ticketcomment, name: ticket comment}
+  model: contenttypes.contenttype
+  pk: 46
+- fields: {app_label: app, model: ticketmilestone, name: ticket milestone}
+  model: contenttypes.contenttype
+  pk: 44
+- fields: {app_label: auth, model: user, name: user}
+  model: contenttypes.contenttype
+  pk: 3
+- fields: {app_label: app, model: userprofile, name: user profile}
+  model: contenttypes.contenttype
+  pk: 39
+- fields: {app_label: app, model: uservalidationkey, name: user validation key}
+  model: contenttypes.contenttype
+  pk: 40
+- fields: {app_label: app, model: wikiattachment, name: wiki attachment}
+  model: contenttypes.contenttype
+  pk: 43
+- fields: {app_label: app, model: wikipage, name: wiki page}
+  model: contenttypes.contenttype
+  pk: 41
+- fields: {app_label: app, model: wikirevision, name: wiki revision}
+  model: contenttypes.contenttype
+  pk: 42
+- fields: {app_label: djcelery, model: workerstate, name: worker}
+  model: contenttypes.contenttype
+  pk: 19
+- fields: {domain: example.com, name: example.com}
+  model: sites.site
+  pk: 1
+- fields: {app_name: djcelery, applied: !!timestamp '2012-02-18 19:06:54.425834',
+    migration: 0001_initial}
+  model: south.migrationhistory
+  pk: 1
+- fields: {app_name: app, applied: !!timestamp '2012-02-18 19:06:54.844180', migration: 0001_initial}
+  model: south.migrationhistory
+  pk: 2
+- fields: {app_name: api, applied: !!timestamp '2012-02-18 19:06:55.235816', migration: 0001_initial}
+  model: south.migrationhistory
+  pk: 3
+- fields:
+    author: 1
+    content: You have successfully installed webEval.
+    date: 2012-02-18 03:05:30
+    permalink: 716d1f467bbc8464f7ce58303296c9ea
+    tags: []
+    title: Successful install
+  model: app.blogentry
+  pk: 1
+- fields: {blog_entry: 1}
+  model: app.dashboardentry
+  pk: 1
+- fields: {description: Forum Index, last_post: null, name: webEval, parent_board: null,
+    posts: 0, public: true, topics: 0}
+  model: app.forumboard
+  pk: 1
+- fields: {code: Teodor_Pripoae, name: Teodor Pripoae}
+  model: app.author
+  pk: 1
+- fields:
+    code: none
+    end_time: 2099-12-31 00:00:00
+    name: Default
+    problems: [1]
+    registered_users: []
+    start_time: 2012-02-18 03:05:30
+    type: O
+    wiki_page: 1
+    with_open_eval: true
+    with_rating: false
+  model: app.contest
+  pk: 1
+- fields:
+    code: archive
+    end_time: 2022-02-19 04:53:31
+    name: archive
+    problems: []
+    registered_users: []
+    start_time: 2012-02-18 04:53:31
+    type: O
+    wiki_page: 3
+    with_open_eval: true
+    with_rating: false
+  model: app.contest
+  pk: 2
+- fields:
+    code: training
+    end_time: 2022-02-19 04:54:23
+    name: training
+    problems: []
+    registered_users: []
+    start_time: 2012-02-18 04:54:23
+    type: O
+    wiki_page: 4
+    with_open_eval: true
+    with_rating: false
+  model: app.contest
+  pk: 3
+- fields:
+    author: 1
+    code: adunare
+    forum_topic: null
+    memory_limit: 16384
+    name: adunare
+    owner: 1
+    resource: 1
+    source_limit: 50000
+    tags: []
+    time_limit: 1000
+    type: Normal
+    wiki_page: 2
+  model: app.problem
+  pk: 1
+- fields: {author: 1, last_revision: 1, url: contest/default}
+  model: app.wikipage
+  pk: 1
+- fields: {author: 1, last_revision: 2, url: problem/adunare}
+  model: app.wikipage
+  pk: 2
+- fields: {author: 1, last_revision: 3, url: contest/archive}
+  model: app.wikipage
+  pk: 3
+- fields: {author: 1, last_revision: 4, url: contest/training}
+  model: app.wikipage
+  pk: 4
+- fields: {author: 1, last_revision: 5, url: about}
+  model: app.wikipage
+  pk: 5
+- fields: {author: 1, last_revision: 6, url: docs}
+  model: app.wikipage
+  pk: 6
+- fields: {author: 1, last_revision: 7, url: licence}
+  model: app.wikipage
+  pk: 7
+- fields: {author: 1, last_revision: 8, url: faq}
+  model: app.wikipage
+  pk: 8
+- fields: {author: 1, last_revision: 1, url: /user/bossul}
+  model: app.wikipage
+  pk: 9
+- fields: {author: 2, last_revision: 9, url: /user/toni}
+  model: app.wikipage
+  pk: 10
+- fields: {author: 3, last_revision: 10, url: /user/hadesgames}
+  model: app.wikipage
+  pk: 11
+- fields: {author: 1, content: Pagina lu Bossu, date: !!timestamp '2012-02-18 21:36:52.262752',
+    ip: 127.0.0.1, markup_type: C, revision_id: 1, security: Protected, title: 'Bossu ',
+    wiki_page: 9}
+  model: app.wikirevision
+  pk: 1
+- fields: {author: 1, content: "\n== adunare ==\nProblem body...\n=== Input file ===\n\
+      From input file //adunare.in// ...\n=== Output file ===\nWrite ... to output\
+      \ file //adunare.out//.\n=== Restrictions and specifications\n*0 < //N// < 1000\n\
+      \n|=adunare.in |=adunare.out |\n|some input |some output |\n                ",
+    date: !!timestamp '2012-02-18 04:52:43', ip: 127.0.0.1, markup_type: C, revision_id: 1,
+    security: Private, title: adunare, wiki_page: 2}
+  model: app.wikirevision
+  pk: 2
+- fields: {author: 1, content: "\n=== Contest archive ==\nWrite here about contest\
+      \ archive...\n                ", date: !!timestamp '2012-02-18 04:53:31', ip: 127.0.0.1,
+    markup_type: C, revision_id: 1, security: Private, title: Contest archive, wiki_page: 3}
+  model: app.wikirevision
+  pk: 3
+- fields: {author: 1, content: "\n=== Contest training ==\nWrite here about contest\
+      \ training...\n                ", date: !!timestamp '2012-02-18 04:54:23', ip: 127.0.0.1,
+    markup_type: C, revision_id: 1, security: Private, title: Contest training, wiki_page: 4}
+  model: app.wikirevision
+  pk: 4
+- fields: {author: 1, content: Write here about about, date: !!timestamp '2012-02-18
+      04:58:48', ip: 127.0.0.1, markup_type: C, revision_id: 1, security: Public,
+    title: About us, wiki_page: 5}
+  model: app.wikirevision
+  pk: 5
+- fields: {author: 1, content: Write here about docs, date: !!timestamp '2012-02-18
+      04:58:54', ip: 127.0.0.1, markup_type: C, revision_id: 1, security: Public,
+    title: Documentation, wiki_page: 6}
+  model: app.wikirevision
+  pk: 6
+- fields: {author: 1, content: Write here about licence, date: !!timestamp '2012-02-18
+      04:58:58', ip: 127.0.0.1, markup_type: C, revision_id: 1, security: Public,
+    title: License, wiki_page: 7}
+  model: app.wikirevision
+  pk: 7
+- fields: {author: 1, content: Write here about faq, date: !!timestamp '2012-02-18
+      04:59:02', ip: 127.0.0.1, markup_type: C, revision_id: 1, security: Public,
+    title: FAQ, wiki_page: 8}
+  model: app.wikirevision
+  pk: 8
+- fields: {author: 2, content: Pagina lu Penalul asta, date: !!timestamp '2012-02-18
+      21:57:35.654478', ip: 127.0.0.1, markup_type: C, revision_id: 1, security: Protected,
+    title: Toni, wiki_page: 10}
+  model: app.wikirevision
+  pk: 9
+- fields: {author: 3, content: ' Pagina cu icrisop', date: !!timestamp '2012-02-18
+      22:01:32.060802', ip: 127.6.6.6, markup_type: '', revision_id: 1, security: '',
+    title: Hadesgames page, wiki_page: 11}
+  model: app.wikirevision
+  pk: 10
+- fields: {assignee: null, author: 1, content: "test...\r\n", date_posted: !!timestamp '2012-02-18
+      04:56:02', milestone: null, severity: normal, status: open, title: Test ticket
+      creation, type: bug}
+  model: app.ticket
+  pk: 1
+- fields: {codename: add_logentry, content_type: 10, name: Can add log entry}
+  model: auth.permission
+  pk: 29
+- fields: {codename: change_logentry, content_type: 10, name: Can change log entry}
+  model: auth.permission
+  pk: 30
+- fields: {codename: delete_logentry, content_type: 10, name: Can delete log entry}
+  model: auth.permission
+  pk: 31
+- fields: {codename: add_eval, content_type: 48, name: Can add eval}
+  model: auth.permission
+  pk: 143
+- fields: {codename: change_eval, content_type: 48, name: Can change eval}
+  model: auth.permission
+  pk: 144
+- fields: {codename: delete_eval, content_type: 48, name: Can delete eval}
+  model: auth.permission
+  pk: 145
+- fields: {codename: add_author, content_type: 30, name: Can add author}
+  model: auth.permission
+  pk: 89
+- fields: {codename: change_author, content_type: 30, name: Can change author}
+  model: auth.permission
+  pk: 90
+- fields: {codename: delete_author, content_type: 30, name: Can delete author}
+  model: auth.permission
+  pk: 91
+- fields: {codename: add_blogentry, content_type: 21, name: Can add blog entry}
+  model: auth.permission
+  pk: 62
+- fields: {codename: change_blogentry, content_type: 21, name: Can change blog entry}
+  model: auth.permission
+  pk: 63
+- fields: {codename: delete_blogentry, content_type: 21, name: Can delete blog entry}
+  model: auth.permission
+  pk: 64
+- fields: {codename: add_blogrollentry, content_type: 22, name: Can add blog roll
+      entry}
+  model: auth.permission
+  pk: 65
+- fields: {codename: change_blogrollentry, content_type: 22, name: Can change blog
+      roll entry}
+  model: auth.permission
+  pk: 66
+- fields: {codename: delete_blogrollentry, content_type: 22, name: Can delete blog
+      roll entry}
+  model: auth.permission
+  pk: 67
+- fields: {codename: add_calendarentry, content_type: 28, name: Can add calendar entry}
+  model: auth.permission
+  pk: 83
+- fields: {codename: change_calendarentry, content_type: 28, name: Can change calendar
+      entry}
+  model: auth.permission
+  pk: 84
+- fields: {codename: delete_calendarentry, content_type: 28, name: Can delete calendar
+      entry}
+  model: auth.permission
+  pk: 85
+- fields: {codename: add_contest, content_type: 31, name: Can add contest}
+  model: auth.permission
+  pk: 92
+- fields: {codename: change_contest, content_type: 31, name: Can change contest}
+  model: auth.permission
+  pk: 93
+- fields: {codename: delete_contest, content_type: 31, name: Can delete contest}
+  model: auth.permission
+  pk: 94
+- fields: {codename: add_dashboardentry, content_type: 23, name: Can add dashboard
+      entry}
+  model: auth.permission
+  pk: 68
+- fields: {codename: change_dashboardentry, content_type: 23, name: Can change dashboard
+      entry}
+  model: auth.permission
+  pk: 69
+- fields: {codename: delete_dashboardentry, content_type: 23, name: Can delete dashboard
+      entry}
+  model: auth.permission
+  pk: 70
+- fields: {codename: add_facebooksession, content_type: 47, name: Can add facebook
+      session}
+  model: auth.permission
+  pk: 140
+- fields: {codename: change_facebooksession, content_type: 47, name: Can change facebook
+      session}
+  model: auth.permission
+  pk: 141
+- fields: {codename: delete_facebooksession, content_type: 47, name: Can delete facebook
+      session}
+  model: auth.permission
+  pk: 142
+- fields: {codename: add_forumboard, content_type: 25, name: Can add forum board}
+  model: auth.permission
+  pk: 74
+- fields: {codename: change_forumboard, content_type: 25, name: Can change forum board}
+  model: auth.permission
+  pk: 75
+- fields: {codename: delete_forumboard, content_type: 25, name: Can delete forum board}
+  model: auth.permission
+  pk: 76
+- fields: {codename: add_forumpost, content_type: 27, name: Can add forum post}
+  model: auth.permission
+  pk: 80
+- fields: {codename: change_forumpost, content_type: 27, name: Can change forum post}
+  model: auth.permission
+  pk: 81
+- fields: {codename: delete_forumpost, content_type: 27, name: Can delete forum post}
+  model: auth.permission
+  pk: 82
+- fields: {codename: add_forumtopic, content_type: 26, name: Can add forum topic}
+  model: auth.permission
+  pk: 77
+- fields: {codename: change_forumtopic, content_type: 26, name: Can change forum topic}
+  model: auth.permission
+  pk: 78
+- fields: {codename: delete_forumtopic, content_type: 26, name: Can delete forum topic}
+  model: auth.permission
+  pk: 79
+- fields: {codename: add_gradertest, content_type: 35, name: Can add grader test}
+  model: auth.permission
+  pk: 104
+- fields: {codename: change_gradertest, content_type: 35, name: Can change grader
+      test}
+  model: auth.permission
+  pk: 105
+- fields: {codename: delete_gradertest, content_type: 35, name: Can delete grader
+      test}
+  model: auth.permission
+  pk: 106
+- fields: {codename: add_job, content_type: 33, name: Can add job}
+  model: auth.permission
+  pk: 98
+- fields: {codename: change_job, content_type: 33, name: Can change job}
+  model: auth.permission
+  pk: 99
+- fields: {codename: delete_job, content_type: 33, name: Can delete job}
+  model: auth.permission
+  pk: 100
+- fields: {codename: add_privatemessage, content_type: 29, name: Can add private message}
+  model: auth.permission
+  pk: 86
+- fields: {codename: change_privatemessage, content_type: 29, name: Can change private
+      message}
+  model: auth.permission
+  pk: 87
+- fields: {codename: delete_privatemessage, content_type: 29, name: Can delete private
+      message}
+  model: auth.permission
+  pk: 88
+- fields: {codename: add_problem, content_type: 32, name: Can add problem}
+  model: auth.permission
+  pk: 95
+- fields: {codename: change_problem, content_type: 32, name: Can change problem}
+  model: auth.permission
+  pk: 96
+- fields: {codename: delete_problem, content_type: 32, name: Can delete problem}
+  model: auth.permission
+  pk: 97
+- fields: {codename: add_ratingcache, content_type: 36, name: Can add rating cache}
+  model: auth.permission
+  pk: 107
+- fields: {codename: change_ratingcache, content_type: 36, name: Can change rating
+      cache}
+  model: auth.permission
+  pk: 108
+- fields: {codename: delete_ratingcache, content_type: 36, name: Can delete rating
+      cache}
+  model: auth.permission
+  pk: 109
+- fields: {codename: add_scorecache, content_type: 37, name: Can add score cache}
+  model: auth.permission
+  pk: 110
+- fields: {codename: change_scorecache, content_type: 37, name: Can change score cache}
+  model: auth.permission
+  pk: 111
+- fields: {codename: delete_scorecache, content_type: 37, name: Can delete score cache}
+  model: auth.permission
+  pk: 112
+- fields: {codename: add_scoreproblemcache, content_type: 38, name: Can add score
+      problem cache}
+  model: auth.permission
+  pk: 113
+- fields: {codename: change_scoreproblemcache, content_type: 38, name: Can change
+      score problem cache}
+  model: auth.permission
+  pk: 114
+- fields: {codename: delete_scoreproblemcache, content_type: 38, name: Can delete
+      score problem cache}
+  model: auth.permission
+  pk: 115
+- fields: {codename: add_tag, content_type: 24, name: Can add tag}
+  model: auth.permission
+  pk: 71
+- fields: {codename: change_tag, content_type: 24, name: Can change tag}
+  model: auth.permission
+  pk: 72
+- fields: {codename: delete_tag, content_type: 24, name: Can delete tag}
+  model: auth.permission
+  pk: 73
+- fields: {codename: add_test, content_type: 34, name: Can add test}
+  model: auth.permission
+  pk: 101
+- fields: {codename: change_test, content_type: 34, name: Can change test}
+  model: auth.permission
+  pk: 102
+- fields: {codename: delete_test, content_type: 34, name: Can delete test}
+  model: auth.permission
+  pk: 103
+- fields: {codename: add_ticket, content_type: 45, name: Can add ticket}
+  model: auth.permission
+  pk: 134
+- fields: {codename: change_ticket, content_type: 45, name: Can change ticket}
+  model: auth.permission
+  pk: 135
+- fields: {codename: delete_ticket, content_type: 45, name: Can delete ticket}
+  model: auth.permission
+  pk: 136
+- fields: {codename: add_ticketcomment, content_type: 46, name: Can add ticket comment}
+  model: auth.permission
+  pk: 137
+- fields: {codename: change_ticketcomment, content_type: 46, name: Can change ticket
+      comment}
+  model: auth.permission
+  pk: 138
+- fields: {codename: delete_ticketcomment, content_type: 46, name: Can delete ticket
+      comment}
+  model: auth.permission
+  pk: 139
+- fields: {codename: add_ticketmilestone, content_type: 44, name: Can add ticket milestone}
+  model: auth.permission
+  pk: 131
+- fields: {codename: change_ticketmilestone, content_type: 44, name: Can change ticket
+      milestone}
+  model: auth.permission
+  pk: 132
+- fields: {codename: delete_ticketmilestone, content_type: 44, name: Can delete ticket
+      milestone}
+  model: auth.permission
+  pk: 133
+- fields: {codename: add_userprofile, content_type: 39, name: Can add user profile}
+  model: auth.permission
+  pk: 116
+- fields: {codename: change_userprofile, content_type: 39, name: Can change user profile}
+  model: auth.permission
+  pk: 117
+- fields: {codename: delete_userprofile, content_type: 39, name: Can delete user profile}
+  model: auth.permission
+  pk: 118
+- fields: {codename: add_uservalidationkey, content_type: 40, name: Can add user validation
+      key}
+  model: auth.permission
+  pk: 119
+- fields: {codename: change_uservalidationkey, content_type: 40, name: Can change
+      user validation key}
+  model: auth.permission
+  pk: 120
+- fields: {codename: delete_uservalidationkey, content_type: 40, name: Can delete
+      user validation key}
+  model: auth.permission
+  pk: 121
+- fields: {codename: add_wikiattachment, content_type: 43, name: Can add wiki attachment}
+  model: auth.permission
+  pk: 128
+- fields: {codename: change_wikiattachment, content_type: 43, name: Can change wiki
+      attachment}
+  model: auth.permission
+  pk: 129
+- fields: {codename: delete_wikiattachment, content_type: 43, name: Can delete wiki
+      attachment}
+  model: auth.permission
+  pk: 130
+- fields: {codename: add_wikipage, content_type: 41, name: Can add wiki page}
+  model: auth.permission
+  pk: 122
+- fields: {codename: change_wikipage, content_type: 41, name: Can change wiki page}
+  model: auth.permission
+  pk: 123
+- fields: {codename: delete_wikipage, content_type: 41, name: Can delete wiki page}
+  model: auth.permission
+  pk: 124
+- fields: {codename: add_wikirevision, content_type: 42, name: Can add wiki revision}
+  model: auth.permission
+  pk: 125
+- fields: {codename: change_wikirevision, content_type: 42, name: Can change wiki
+      revision}
+  model: auth.permission
+  pk: 126
+- fields: {codename: delete_wikirevision, content_type: 42, name: Can delete wiki
+      revision}
+  model: auth.permission
+  pk: 127
+- fields: {codename: add_group, content_type: 2, name: Can add group}
+  model: auth.permission
+  pk: 4
+- fields: {codename: change_group, content_type: 2, name: Can change group}
+  model: auth.permission
+  pk: 5
+- fields: {codename: delete_group, content_type: 2, name: Can delete group}
+  model: auth.permission
+  pk: 6
+- fields: {codename: add_message, content_type: 4, name: Can add message}
+  model: auth.permission
+  pk: 10
+- fields: {codename: change_message, content_type: 4, name: Can change message}
+  model: auth.permission
+  pk: 11
+- fields: {codename: delete_message, content_type: 4, name: Can delete message}
+  model: auth.permission
+  pk: 12
+- fields: {codename: add_permission, content_type: 1, name: Can add permission}
+  model: auth.permission
+  pk: 1
+- fields: {codename: change_permission, content_type: 1, name: Can change permission}
+  model: auth.permission
+  pk: 2
+- fields: {codename: delete_permission, content_type: 1, name: Can delete permission}
+  model: auth.permission
+  pk: 3
+- fields: {codename: add_user, content_type: 3, name: Can add user}
+  model: auth.permission
+  pk: 7
+- fields: {codename: change_user, content_type: 3, name: Can change user}
+  model: auth.permission
+  pk: 8
+- fields: {codename: delete_user, content_type: 3, name: Can delete user}
+  model: auth.permission
+  pk: 9
+- fields: {codename: add_captchastore, content_type: 12, name: Can add captcha store}
+  model: auth.permission
+  pk: 35
+- fields: {codename: change_captchastore, content_type: 12, name: Can change captcha
+      store}
+  model: auth.permission
+  pk: 36
+- fields: {codename: delete_captchastore, content_type: 12, name: Can delete captcha
+      store}
+  model: auth.permission
+  pk: 37
+- fields: {codename: add_comment, content_type: 7, name: Can add comment}
+  model: auth.permission
+  pk: 19
+- fields: {codename: can_moderate, content_type: 7, name: Can moderate comments}
+  model: auth.permission
+  pk: 22
+- fields: {codename: change_comment, content_type: 7, name: Can change comment}
+  model: auth.permission
+  pk: 20
+- fields: {codename: delete_comment, content_type: 7, name: Can delete comment}
+  model: auth.permission
+  pk: 21
+- fields: {codename: add_commentflag, content_type: 8, name: Can add comment flag}
+  model: auth.permission
+  pk: 23
+- fields: {codename: change_commentflag, content_type: 8, name: Can change comment
+      flag}
+  model: auth.permission
+  pk: 24
+- fields: {codename: delete_commentflag, content_type: 8, name: Can delete comment
+      flag}
+  model: auth.permission
+  pk: 25
+- fields: {codename: add_contenttype, content_type: 5, name: Can add content type}
+  model: auth.permission
+  pk: 13
+- fields: {codename: change_contenttype, content_type: 5, name: Can change content
+      type}
+  model: auth.permission
+  pk: 14
+- fields: {codename: delete_contenttype, content_type: 5, name: Can delete content
+      type}
+  model: auth.permission
+  pk: 15
+- fields: {codename: add_crontabschedule, content_type: 16, name: Can add crontab}
+  model: auth.permission
+  pk: 47
+- fields: {codename: change_crontabschedule, content_type: 16, name: Can change crontab}
+  model: auth.permission
+  pk: 48
+- fields: {codename: delete_crontabschedule, content_type: 16, name: Can delete crontab}
+  model: auth.permission
+  pk: 49
+- fields: {codename: add_intervalschedule, content_type: 15, name: Can add interval}
+  model: auth.permission
+  pk: 44
+- fields: {codename: change_intervalschedule, content_type: 15, name: Can change interval}
+  model: auth.permission
+  pk: 45
+- fields: {codename: delete_intervalschedule, content_type: 15, name: Can delete interval}
+  model: auth.permission
+  pk: 46
+- fields: {codename: add_periodictask, content_type: 18, name: Can add periodic task}
+  model: auth.permission
+  pk: 53
+- fields: {codename: change_periodictask, content_type: 18, name: Can change periodic
+      task}
+  model: auth.permission
+  pk: 54
+- fields: {codename: delete_periodictask, content_type: 18, name: Can delete periodic
+      task}
+  model: auth.permission
+  pk: 55
+- fields: {codename: add_periodictasks, content_type: 17, name: Can add periodic tasks}
+  model: auth.permission
+  pk: 50
+- fields: {codename: change_periodictasks, content_type: 17, name: Can change periodic
+      tasks}
+  model: auth.permission
+  pk: 51
+- fields: {codename: delete_periodictasks, content_type: 17, name: Can delete periodic
+      tasks}
+  model: auth.permission
+  pk: 52
+- fields: {codename: add_taskmeta, content_type: 13, name: Can add task meta}
+  model: auth.permission
+  pk: 38
+- fields: {codename: change_taskmeta, content_type: 13, name: Can change task meta}
+  model: auth.permission
+  pk: 39
+- fields: {codename: delete_taskmeta, content_type: 13, name: Can delete task meta}
+  model: auth.permission
+  pk: 40
+- fields: {codename: add_tasksetmeta, content_type: 14, name: Can add taskset meta}
+  model: auth.permission
+  pk: 41
+- fields: {codename: change_tasksetmeta, content_type: 14, name: Can change taskset
+      meta}
+  model: auth.permission
+  pk: 42
+- fields: {codename: delete_tasksetmeta, content_type: 14, name: Can delete taskset
+      meta}
+  model: auth.permission
+  pk: 43
+- fields: {codename: add_taskstate, content_type: 20, name: Can add task}
+  model: auth.permission
+  pk: 59
+- fields: {codename: change_taskstate, content_type: 20, name: Can change task}
+  model: auth.permission
+  pk: 60
+- fields: {codename: delete_taskstate, content_type: 20, name: Can delete task}
+  model: auth.permission
+  pk: 61
+- fields: {codename: add_workerstate, content_type: 19, name: Can add worker}
+  model: auth.permission
+  pk: 56
+- fields: {codename: change_workerstate, content_type: 19, name: Can change worker}
+  model: auth.permission
+  pk: 57
+- fields: {codename: delete_workerstate, content_type: 19, name: Can delete worker}
+  model: auth.permission
+  pk: 58
+- fields: {codename: add_session, content_type: 6, name: Can add session}
+  model: auth.permission
+  pk: 16
+- fields: {codename: change_session, content_type: 6, name: Can change session}
+  model: auth.permission
+  pk: 17
+- fields: {codename: delete_session, content_type: 6, name: Can delete session}
+  model: auth.permission
+  pk: 18
+- fields: {codename: add_site, content_type: 9, name: Can add site}
+  model: auth.permission
+  pk: 26
+- fields: {codename: change_site, content_type: 9, name: Can change site}
+  model: auth.permission
+  pk: 27
+- fields: {codename: delete_site, content_type: 9, name: Can delete site}
+  model: auth.permission
+  pk: 28
+- fields: {codename: add_migrationhistory, content_type: 11, name: Can add migration
+      history}
+  model: auth.permission
+  pk: 32
+- fields: {codename: change_migrationhistory, content_type: 11, name: Can change migration
+      history}
+  model: auth.permission
+  pk: 33
+- fields: {codename: delete_migrationhistory, content_type: 11, name: Can delete migration
+      history}
+  model: auth.permission
+  pk: 34
+- fields:
+    date_joined: 2012-02-18 21:15:04.471692
+    email: ''
+    first_name: ''
+    groups: []
+    is_active: true
+    is_staff: false
+    is_superuser: true
+    last_login: 2012-02-18 21:15:04.471657
+    last_name: ''
+    password: bossul
+    user_permissions: []
+    username: bossul
+  model: auth.user
+  pk: 1
+- fields:
+    date_joined: 2012-02-18 21:15:52.911464
+    email: ''
+    first_name: ''
+    groups: []
+    is_active: true
+    is_staff: false
+    is_superuser: true
+    last_login: 2012-02-18 21:15:52.911443
+    last_name: ''
+    password: panamea
+    user_permissions: []
+    username: toni
+  model: auth.user
+  pk: 2
+- fields:
+    date_joined: 2012-02-18 21:16:24.871712
+    email: ''
+    first_name: ''
+    groups: []
+    is_active: true
+    is_staff: false
+    is_superuser: true
+    last_login: 2012-02-18 21:16:24.871686
+    last_name: ''
+    password: computer1
+    user_permissions: []
+    username: hadesgames
+  model: auth.user
+  pk: 3
+- fields:
+    avatar: ''
+    city: ''
+    country: ''
+    developer: false
+    facebook_uid: null
+    forum_posts: 0
+    groups: []
+    rating: 0
+    reputation: 0
+    twitter_user: null
+    user_permissions: []
+    wiki_page: null
+  model: app.userprofile
+  pk: 1
+- fields:
+    avatar: ''
+    city: ''
+    country: ''
+    developer: false
+    facebook_uid: null
+    forum_posts: 0
+    groups: []
+    rating: 0
+    reputation: 0
+    twitter_user: null
+    user_permissions: []
+    wiki_page: null
+  model: app.userprofile
+  pk: 2
+- fields:
+    avatar: ''
+    city: ''
+    country: ''
+    developer: false
+    facebook_uid: null
+    forum_posts: 0
+    groups: []
+    rating: 0
+    reputation: 0
+    twitter_user: null
+    user_permissions: []
+    wiki_page: null
+  model: app.userprofile
+  pk: 3

@@ -6,6 +6,7 @@
 
 
 {% block content %}
+<div class="span7">
   <h1> Create new blog entry </h1><hr/>
 
   <form accept-charset="utf-8" method="post" action="{% url new_entry %}">
@@ -13,14 +14,19 @@
     <div class="control-group">
       <label for="form_title">Title</label>
       {{ form.errors.title }}
-      <input name="title" type="text" value="{{ form.data.title }}" class="span9">
-    </li>
+      <input name="title" type="text" value="{{ form.data.title }}" class="span7">
+    </div>
 
     <div class="control-group">
       <label for="form_content">Content</label>
-      <textarea class="span9" name="content" rows="10" cols="50"type="text">{{ form.data.content|safe}}</textarea><br>
+      <textarea class="span7" name="content" rows="10" cols="50"type="text">{{ form.data.content|safe}}</textarea><br>
     </div>
     <input name="submit" value="Create" class="btn btn-primary" type="submit" size="30">
     <div class="clear"></div>
   </form>
+</div>
+
+<div class="span3">
+  {% include "blog/sidebar.html" %}
+</div>
 {% endblock %}
