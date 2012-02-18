@@ -15,7 +15,7 @@ def send_validation_key (username, key):
     email_subject = 'Your webEval account confirmation'
     email_body = "Hello, and thanks for signing up for an webEval account!\n\nTo activate your account, click this link within 48 hours:\n\n%s%s\n\nIf you didn't register on this site, please ignore this mail." \
                 % (HOST_URL,
-                   reverse('app.auth__controller.validate_user',
+                   reverse('validate_user',
                    kwargs={'validation_key' : validation_key,
                            'user_name' : username.username}))
     email = EmailMessage(email_subject, email_body, to=[username.email])

@@ -7,7 +7,7 @@
 {% block wiki_page %}
 {% if active_or_upcoming_contests %}
 	<h2>Current or upcoming contests</h2>
-	
+
 	<table class='contests_table'>
 		<thead>
 			<tr>
@@ -21,7 +21,7 @@
 		<tbody>
 			{% for contest in active_or_upcoming_contests %}
 			<tr class="odd">
-				<td class="contest_name_column"><a href="{% url webEval.web_eval__core.grader__controller.display_contest contest_code=contest.code %}">{{ contest.name }}</a></td>
+				<td class="contest_name_column"><a href="{% url display_contest contest_code=contest.code %}">{{ contest.name }}</a></td>
 				<td class="contest_start_time">
 					<a href="http://timeanddate.com/worldclock/fixedtime.html?{{ contest.start_time|timeanddate_template|safe }}">
 						{{ contest.start_time|date:"d/m/Y H:i:s" }}
@@ -37,7 +37,7 @@
 				</td>
 				<td class="contest_register_time_countdown">
 					{% if contest.started %}
-						<a href="">{{ contest.registered_users_count }} users registered</a> 
+						<a href="">{{ contest.registered_users_count }} users registered</a>
 					{% else %}
 						{% if contest.registration_started %}
 							{{ contest.registration_end_time|timedelta }} until registration ends.
@@ -67,7 +67,7 @@
 		<tbody>
 		{% for contest in old_contests %}
 			<tr>
-				<td class="contest_name_column"><a href="{% url webEval.web_eval__core.grader__controller.display_contest contest_code=contest.code %}">{{ contest.name }}</a></td>
+				<td class="contest_name_column"><a href="{% url display_contest contest_code=contest.code %}">{{ contest.name }}</a></td>
 				<td class="contest_start_time">{{ contest.start_time|date:"d/m/Y H:i:s" }}</td>
 				<td class="contest_duration">{{ contest.duration }}</td>
 				<td class="contest_results"><a href="">View results</a></td>

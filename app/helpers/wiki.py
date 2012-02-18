@@ -11,7 +11,7 @@ def create_problem_wiki_page (problem, request):
     user = user_auth(request)
 
     w = WikiPage()
-    w.url = reverse('app.grader__controller.display_problem',
+    w.url = reverse('display_problem',
                     kwargs = { 'problem_code' : problem.code }).rstrip('/').lstrip('/')
     w.author = user
     w.save()
@@ -49,7 +49,7 @@ Write ... to output file //%s.out//.
 
 def create_user_wiki_page (user, request):
     w = WikiPage()
-    w.url = reverse('app.user__controller.display_user',
+    w.url = reverse('display_user',
                     kwargs = { 'user_name' : user.username }).rstrip('/').lstrip('/')
     w.author = user
     w.save()
@@ -79,7 +79,7 @@ def create_contest_wiki_page (contest, request):
     user = user_auth(request)
 
     w = WikiPage()
-    w.url = reverse('app.grader__controller.display_contest',
+    w.url = reverse('display_contest',
                     kwargs = {'contest_code' : contest.code }).rstrip('/').lstrip('/')
     w.author = user
     w.save()

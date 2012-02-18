@@ -4,7 +4,7 @@
 	<ul class="blog_sidebar_ul">
 		{% for entryit in last_blog_entries %}
 			<li>
-				<a href="{% url display_blog_entry username=entryit.author.username permalink=entryit.permalink %}">
+				<a href="{% url display_entry username=entryit.author.username permalink=entryit.permalink %}">
 					{{ entryit.title }}
 				</a>
 			</li>

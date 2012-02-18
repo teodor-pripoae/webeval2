@@ -61,7 +61,7 @@ def create_wiki_page (request, page_url = None):
             page.last_revision = revision
             page.save()
 
-            return HttpResponseRedirect(reverse('app.wiki__controller.display_page',
+            return HttpResponseRedirect(reverse('display_page',
                                             kwargs={'page_url' : page_url }))
     else:
         form = WikiRevisionEditForm()
@@ -99,10 +99,10 @@ def edit_page (request, page_url, widgets = {}):
             page.last_revision = revision
             page.save()
             if 'is_problem' in widgets:
-                return HttpResponseRedirect(reverse('app.grader__controller.display_problem',
+                return HttpResponseRedirect(reverse('display_problem',
                                                     kwargs = {'problem_code' : widgets['problem'].code }))
 
-            return HttpResponseRedirect(reverse('app.wiki__controller.display_page',
+            return HttpResponseRedirect(reverse('display_page',
                                                     kwargs = {'page_url' : page.url }))
         else:
             print form.errors
@@ -303,7 +303,7 @@ def delete_attachment (request, page_url, hash):
     os.remove(os.path.join(ATTACHMENTS_DIR, "attachment%d-%s" % (attachment.id, attachment.name)))
     attachment.delete()
 
-    return HttpResponseRedirect(reverse('app.wiki__controller.attachments',
+    return HttpResponseRedirect(reverse('attachments',
                                         kwargs={'page_url' : wiki_page.url }))
 
 # copy a wiki page
@@ -329,7 +329,7 @@ def display_revision (revision, user, context_instance, widgets = {}):
         if user is not None:    # He is an user with not enough rights
             return redirect_to_index("You don't have enough rights to view this page")
         else:       # He is not logged in, so we don't know if he can or not view this page, we'll redirect him to login page
-            return redirect_with_message(page = reverse('app.auth__controller.login'),
+            return redirect_with_message(page = reverse('login'),
                                          message = "Please login to view this page")
 
     # Finally display the wiki revision

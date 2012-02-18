@@ -42,7 +42,7 @@ CONNECTION = httplib.HTTPSConnection(SERVER)
 
 @login_required
 def successful_login (request):
-    return HttpResponseRedirect(reverse('app.blog__controller.index'))
+    return HttpResponseRedirect(reverse('blog_posts'))
 
 
 def login (request):
@@ -54,7 +54,7 @@ def login (request):
         if user is not None:
             if user.is_active:
                 auth_login(request, user)
-                return HttpResponseRedirect(reverse('app.auth__controller.successful_login'))
+                return HttpResponseRedirect(reverse('successful_login'))
             else:
                 form.errors['username'] = "Your account has been disabled!"
         else:
@@ -102,7 +102,7 @@ def facebook_login (request):
             if user:
                 if user.is_active:
                     auth_login(request, user)
-                    return HttpResponseRedirect(reverse('app.auth__controller.successful_login'))
+                    return HttpResponseRedirect(reverse('successful_login'))
                 else:
                     error = 'AUTH_DISABLED'
             else:
@@ -139,7 +139,7 @@ def twitter_return(request):
         if user:
             if user.is_active:
                 auth_login(request, user)
-                return HttpResponseRedirect(reverse('app.auth__controller.successful_login'))
+                return HttpResponseRedirect(reverse('successful_login'))
             else:
                 error = 'AUTH_DISABLED'
         else:
@@ -194,7 +194,7 @@ def register (request):
             copy_initial_avatar(username)
             send_validation_key(username, key = UserValidationKey())
 
-            return HttpResponseRedirect(reverse('app.auth__controller.successful_register'))
+            return HttpResponseRedirect(reverse('successful_register'))
     else:
         form = UserRegisterForm()
 
@@ -217,7 +217,7 @@ def successful_register (request):
 
 def logout (request):
     auth_logout(request)
-    return HttpResponseRedirect(reverse('app.blog__controller.index'))
+    return HttpResponseRedirect(reverse('blog_posts'))
 
 
 def validate_user (request, user_name, validation_key):

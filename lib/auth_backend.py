@@ -7,12 +7,12 @@ from django.contrib.auth.models import User
 from openid.consumer.consumer import SUCCESS
 from django.core.mail import mail_admins
 
-from webEval.web_eval__core.models import *
-from webEval.web_eval__core.wiki__helper import *
+from app.models import *
+from app.helpers.wiki import *
 
 import cgi
 import urllib
-import simplejson 
+import simplejson
 
 class CustomUserModelBackend(ModelBackend):
     def authenticate(self, username=None, password=None):
@@ -39,7 +39,7 @@ class CustomUserModelBackend(ModelBackend):
         return self._user_class
 
 class FacebookBackend:
-    
+
     def authenticate(self, token=None):
 
         facebook_session = FacebookSession.objects.get(
@@ -47,12 +47,12 @@ class FacebookBackend:
         )
 
         profile = facebook_session.query('me')
-   
+
         try:
             user = UserProfile.objects.get(facebook_uid=profile['id'])
         except UserProfile.DoesNotExist, e:
             return None #user = auth_models.User(username=profile['id'])
-        
+
         try:
             FacebookSession.objects.get(uid=profile['id']).delete()
         except FacebookSession.DoesNotExist, e:
@@ -61,16 +61,16 @@ class FacebookBackend:
         facebook_session.uid = profile['id']
         facebook_session.user = user
         facebook_session.save()
-   
+
         return user.user_ptr
-   
+
     def get_user(self, user_id):
 
         try:
             return auth_models.User.objects.get(pk=user_id)
         except auth_models.User.DoesNotExist:
             return None
-        
+
 class GoogleBackend:
 
     def authenticate(self, openid_response):
@@ -78,7 +78,7 @@ class GoogleBackend:
             return None
         if openid_response.status != SUCCESS:
             return None
-        
+
         google_email = openid_response.getSigned('http://openid.net/srv/ax/1.0', 'value.email')
         google_firstname = openid_response.getSigned('http://openid.net/srv/ax/1.0', 'value.firstname')
         google_lastname = openid_response.getSigned('http://openid.net/srv/ax/1.0', 'value.lastname')
@@ -87,35 +87,35 @@ class GoogleBackend:
         except User.DoesNotExist:
             # create a new user, or send a message to admins, etc.
             return None
-        
+
         return user
-    
+
     def get_user(self, user_id):
-    
+
         try:
             return User.objects.get(pk=user_id)
         except User.DoesNotExist:
             return None
-        
-        
+
+
 class TwitterBackend:
-    
+
     def authenticate(selfself, creds):
         if creds is None:
             return None
         if not 'screen_name' in creds:
             return None
-        
+
         twitter_user = creds['screen_name']
-        
+
         try:
             user = UserProfile.objects.get(twitter_user=twitter_user)
         except UserProfile.DoesNotExist:
             return None
         return user.user_ptr
-        
+
     def get_user(self, user_id):
-        
+
         try:
             return User.objects.get(pk=user_id)
         except User.DoesNotExist:

@@ -2,9 +2,9 @@
 {% block title %}
 	Create problem
 {% endblock %}
-    
+
 {% block wiki_page %}
-	<form method="post" action="{% url webEval.web_eval__core.grader__controller.create_problem %}">
+	<form method="post" action="{% url create_problem %}">
 		{% csrf_token %}
 		<fieldset>
 			<legend>Create problem</legend>

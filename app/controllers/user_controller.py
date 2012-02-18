@@ -140,7 +140,7 @@ def new_private_message (request):
             pm.date = datetime.datetime.now()
             pm.user_from = user_from
             pm.save()
-            return HttpResponseRedirect(reverse('app.user__controller.private_messages') + '#post%d' % pm.id)
+            return HttpResponseRedirect(reverse('private_messages') + '#post%d' % pm.id)
     else:
         form = PrivateMessageForm()
 

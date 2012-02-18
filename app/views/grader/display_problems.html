@@ -18,9 +18,9 @@
 	{% for problem in problems.all %}
 	{% if problem|visible:request.user %}
 		<tr class="odd">
-			<td width="25%" class="contest_problem_task"><span style="float:left;"><a href="{% url webEval.web_eval__core.grader__controller.display_problem problem_code=problem.code %}">{{ problem.code }}</a></span></td>
-			<td width="30%" class="contest_problem_author"><a href="{% url webEval.web_eval__core.grader__controller.display_problems_by_author author_code=problem.author.code %}">{{ problem.author.name }}</a></td>
-			<td width="31%" class="contest_problem_source"><a href="{% url webEval.web_eval__core.grader__controller.display_contest contest_code=problem.resource.code %}">{{ problem.resource.name }}</a></td>
+			<td width="25%" class="contest_problem_task"><span style="float:left;"><a href="{% url display_problem problem_code=problem.code %}">{{ problem.code }}</a></span></td>
+			<td width="30%" class="contest_problem_author"><a href="{% url display_problems_by_author author_code=problem.author.code %}">{{ problem.author.name }}</a></td>
+			<td width="31%" class="contest_problem_source"><a href="{% url display_contest contest_code=problem.resource.code %}">{{ problem.resource.name }}</a></td>
 			<td width="14%" class="contest_problem_score" id="problem_{{ problem.id }}_score"></td>
 		</tr>
 	{% endif %}

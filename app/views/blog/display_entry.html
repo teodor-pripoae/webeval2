@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block extra_css %}
-	<link type="text/css" rel="stylesheet" href="{{ MEDIA_URL }}/css/blog.css"/>
+	<link type="text/css" rel="stylesheet" href="{{ STATIC_URL }}stylesheets/blog.css"/>
 {% endblock %}
 
 {% block extra_js %}
@@ -21,23 +21,23 @@
 {% endblock %}
 
 {% block wiki_page %}
-	
+
 
 	{% with is_blog_entry=1 %}{% include "blog/sidebar.html" %}{% endwith %}
-		
+
 <div class="blog">
 
 	<div class="item">
 		<span class="blog_entry_date">
 			{{ blog_entry.date|date:"d M Y" }}
 		</span>
-		
+
 		<h1 style="padding: 15px 0px 15px 0px;">{{ blog_entry.title }}</h1>
-			
+
 		<div class="wiki_text_block blog_entry_content">
 			{{ blog_entry.content|creole|webEval_markup|safe }}
 		</div>
-		
+
 		<div style="padding: 15px 0px 15px 0px">
 			<span class='st_twitter_button' displayText='Tweet'></span>
 			<span class='st_facebook_button' displayText='Facebook'></span>
@@ -55,59 +55,59 @@
 			{% endfor %}
 		</span>
 		<br>
-		
+
 		<div>
-			Posted on {{ blog_entry.date }} by <a href="{% url webEval.web_eval__core.blog__controller.index username=blog_entry.author.username %}">{{ blog_entry.author.first_name }} {{ blog_entry.author.last_name }}</a>
+			Posted on {{ blog_entry.date }} by <a href="{% url blog_posts  username=blog_entry.author.username %}">{{ blog_entry.author.first_name }} {{ blog_entry.author.last_name }}</a>
 		</div>
-		
+
 		<span>
 		{% if can_edit %}
-			<a href="{% url webEval.web_eval__core.blog__controller.edit_entry username=blog_entry.author.username permalink=blog_entry.permalink %}">Edit</a>
+		  <a href="{% url edit_entry username=blog_entry.author.username permalink=blog_entry.permalink %}">Edit</a>
 		{% endif %}
 		{% if can_delete %}
-			| <a href="{% url webEval.web_eval__core.blog__controller.delete_entry username=blog_entry.author.username permalink=blog_entry.permalink %}">Delete</a>
+		  | <a href="{% url delete_entry username=blog_entry.author.username permalink=blog_entry.permalink %}">Delete</a>
 		{% endif %}
 		{% if can_manage_dashboard %}
-			| <a href="{% url webEval.web_eval__core.blog__controller.toogle_dashboard username=blog_entry.author.username permalink=blog_entry.permalink %}">{% if is_dashboard_entry %}Remove from dashboard {% else %}Add to dashboard {% endif %}</a>
+		  | <a href="{% url toggle_dashboard username=blog_entry.author.username permalink=blog_entry.permalink %}">{% if is_dashboard_entry %}Remove from dashboard {% else %}Add to dashboard {% endif %}</a>
 		{% endif %}
 		</span>
-		
-		
+
+
 	</div>
-	
-    
+
+
     <div id="comments">
     	{% get_comment_count for blog_entry as comment_count %}
     	<h3> {{ comment_count }} Comment(s)</h3>
     	<div id="remotebox">
 		    {% get_comment_list for blog_entry as comment_list %}
-		    <form action="{% url webEval.web_eval__core.blog__controller.delete_comment blog_entry.pk %}" method="POST">
+		    <form action="{% url delete_blog_comment blog_entry.pk %}" method="POST">
 		    {% csrf_token %}
 		    {% for comment in comment_list %}
-		        <div class="comment" id="comment{{ comment.id }}"> 
-		            <div class="header"> 
+		        <div class="comment" id="comment{{ comment.id }}">
+		            <div class="header">
 		                <span class="timestamp">
 		                    {{ comment.submit_date }}
-		                </span> 
+		                </span>
 		                <span class="tiny-user">
 		                    {% with comment.user as tiny_user %}
 		                    	{% include "include_tiny_user.html" %}
 		                    {% endwith %}
-		                </span> 
+		                </span>
 		            </div>
 		            {% if request.user.is_staff %}
 		            <span style="float: right">
             			<input type="checkbox" name="delete" value="{{ comment.pk }}">
-            			<a href="{% url webEval.web_eval__core.blog__controller.delete_comment blog_entry.pk comment.id %}">delete</a>
+            			<a href="{% url delete_blog_comment blog_entry.pk comment.id %}">delete</a>
             		</span>
-        			{% endif %} 
-		             <div class="blog_comment_body"> 
+        			{% endif %}
+		             <div class="blog_comment_body">
 		                {{ comment.comment|creole|safe }}
-		            </div> 
-		            
-		        </div> 
+		            </div>
+
+		        </div>
 		    {% endfor %}
-		    
+
 		    {% if request.user.is_staff and comment_list %}
     			<p style="float: right">
     				<input type="submit" value="Delete all selected" class="button">
@@ -132,6 +132,6 @@
         <br>
         <input class="submit" name="post" type="submit" value="submit" />
    </form>
-</div>        
+</div>
 {% endblock %}
 

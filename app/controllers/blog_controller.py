@@ -109,7 +109,7 @@ def new_entry (request):
 
             blog_entry.permalink = blog_entry.get_permalink()
             blog_entry.save()
-            return HttpResponseRedirect(reverse("app.blog__controller.display_entry",
+            return HttpResponseRedirect(reverse("display_entry",
                                                 kwargs = {'username' : blog_entry.author.username,
                                                           'permalink' : blog_entry.permalink,
                                                          }
@@ -151,7 +151,7 @@ def edit_entry (request, username, permalink):
 
             update_tags (blog_entry, tags)
 
-            return HttpResponseRedirect(reverse("app.blog__controller.display_entry",
+            return HttpResponseRedirect(reverse("display_entry",
                                                 kwargs = {'username' : username.username,
                                                           'permalink' : permalink,
                                                          }
@@ -184,7 +184,7 @@ def delete_entry (request, username, permalink):
     blog_entry = get_object_or_404(BlogEntry, author = username, permalink = permalink)
     blog_entry.delete()
 
-    return HttpResponseRedirect(reverse('app.blog__controller.index'))
+    return HttpResponseRedirect(reverse('blog_posts'))
 
 
 @login_required
@@ -199,7 +199,7 @@ def delete_comment(request, post_pk, pk=None):
 
         for pk in pklst:
             Comment.objects.get(pk=pk).delete()
-        return HttpResponseRedirect(reverse("app.blog__controller.display_entry",
+        return HttpResponseRedirect(reverse("display_entry",
                                             kwargs={'username' : blog_entry.author.username,
                                                     'permalink' : blog_entry.permalink,
                                                    }
@@ -246,7 +246,7 @@ def comment_posted (request):
         post = BlogEntry.objects.get( pk=post_id )
 
         if post:
-            return HttpResponseRedirect(reverse('app.blog__controller.display_entry',
+            return HttpResponseRedirect(reverse('display_entry',
                                                 kwargs = {'username' : post.author.username,
                                                           'permalink' : post.permalink
                                                          }
@@ -257,7 +257,7 @@ def comment_posted (request):
 
 
 @login_required
-def toogle_dashboard (request, username, permalink):
+def toggle_dashboard (request, username, permalink):
     user = user_auth(request)
     username = get_object_or_404(UserProfile, username = username)
     blog_entry = get_object_or_404(BlogEntry, author = username, permalink = permalink)
@@ -270,5 +270,5 @@ def toogle_dashboard (request, username, permalink):
     else:
         DashboardEntry(blog_entry = blog_entry).save()
 
-    return HttpResponseRedirect(reverse('app.wiki__controller.dashboard'))
+    return HttpResponseRedirect(reverse('dashboard'))
 

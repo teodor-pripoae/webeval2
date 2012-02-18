@@ -26,7 +26,7 @@ class DateTimeWidget(forms.widgets.TextInput):
     def render(self, name, value, attrs=None):
         if value is None: value = ''
         final_attrs = self.build_attrs(attrs, type=self.input_type, name=name)
-        if value != '': 
+        if value != '':
             try:
                 final_attrs['value'] = \
                                    force_unicode(value.strftime(self.dformat))
@@ -36,7 +36,7 @@ class DateTimeWidget(forms.widgets.TextInput):
         if not final_attrs.has_key('id'):
             final_attrs['id'] = u'%s_id' % (name)
         id = final_attrs['id']
-        
+
         jsdformat = self.dformat #.replace('%', '%%')
         cal = calbtn % (settings.MEDIA_URL, id, id, jsdformat, id)
         a = u'<input%s />%s' % (forms.util.flatatt(final_attrs), cal)
@@ -59,8 +59,8 @@ class DateTimeWidget(forms.widgets.TextInput):
             except ValueError:
                 continue
         return None
-    
-    
+
+
 class ParseDateTimeField(forms.Field):
     """ DateTime field that accepts natural-language input
 
@@ -104,7 +104,7 @@ def parsefield_callback(field, **kwargs):
         kwargs.update({'form_class': ParseDateField})
     return field.formfield(**kwargs)
 
-    
+
 class ReCaptcha(forms.widgets.Widget):
     recaptcha_challenge_name = 'recaptcha_challenge_field'
     recaptcha_response_name = 'recaptcha_response_field'
@@ -113,5 +113,5 @@ class ReCaptcha(forms.widgets.Widget):
         return mark_safe(u'%s' % captcha.displayhtml(settings.RECAPTCHA_PUBLIC_KEY))
 
     def value_from_datadict(self, data, files, name):
-        return [data.get(self.recaptcha_challenge_name, None), 
+        return [data.get(self.recaptcha_challenge_name, None),
             data.get(self.recaptcha_response_name, None)]

@@ -8,8 +8,8 @@
 
 {% block content %}
     <h1>Login</h1>
-    
-    <form method="post" action="{% url webEval.web_eval__core.auth__controller.login %}">
+
+    <form method="post" action="{% url login %}">
         {% csrf_token %}
 
         <label for="feed">USERNAME</label><br>
@@ -18,7 +18,7 @@
                 <li>{{ form.errors.username }}</li>
             </ul>
         {% endif %}
-        
+
         <input type="txt" class="txt feed" name="username" id="username" value="{{ form.data.username }}" />
         <br><br>
         <label for="feed">PASSWORD</label><br>
@@ -31,5 +31,5 @@
         <br><br>
         <input type="submit" class="submit get_it" title="get it" value="LOGIN">
     </form>
-    
+
 {% endblock %}

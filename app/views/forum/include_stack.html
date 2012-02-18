@@ -3,6 +3,6 @@
         {% if forloop.counter0  %}
             >
         {% endif %}
-        <a href = "{% url webEval.web_eval__core.forum__controller.display_board board_id=board_now.id %}">{{ board_now.name }}</a>
+        <a href = "{% url display_board board_id=board_now.id %}">{{ board_now.name }}</a>
     {% endfor %}
 </div>

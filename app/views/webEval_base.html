@@ -6,12 +6,12 @@
       {% block title %} The webEval Project {% endblock %}
     </title>
 
-    <link rel="stylesheet" href="{{ STATIC_URL }}/stylesheets/webeval.css" type="text/css"/>
-    <link rel="stylesheet" href="{{ STATIC_URL }}/stylesheets/ui-lightness/jquery-ui-1.8.13.custom.css" type="text/css"/>
-    <link rel="stylesheet" href="{{ STATIC_URL }}/stylesheets/form_popup.css" type="text/css"/>
+    <link rel="stylesheet" href="{{ STATIC_URL }}stylesheets/webeval.css" type="text/css"/>
+    <link rel="stylesheet" href="{{ STATIC_URL }}stylesheets/ui-lightness/jquery-ui-1.8.13.custom.css" type="text/css"/>
+    <link rel="stylesheet" href="{{ STATIC_URL }}stylesheets/form_popup.css" type="text/css"/>
     {% block extra_css %}{% endblock %}
-    <script type="text/javascript" src="{{ STATIC_URL }}/javascripts/jquery.js"></script>
-    <script type="text/javascript" src="{{ STATIC_URL }}/javascripts/jquery-ui-1.8.13.custom.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}javascripts/jquery.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}javascripts/jquery-ui-1.8.13.custom.min.js"></script>
   </head>
   <body>
     <div id="form-login" title="Login" style="display: none;">
@@ -37,7 +37,7 @@
               <a href="{% url blog_posts %}">Blog</a>
             </li>
 
-            <script type="text/javascript" src="{{ STATIC_URL }}/javascripts/auth_menu.js"></script>
+            <script type="text/javascript" src="{{ STATIC_URL }}javascripts/auth_menu.js"></script>
 
             <li {% if navigation.main == "forum" %}class="active"{% endif %}>
               <a href="{% url display_board board_id=1 %}">Forum</a>
@@ -69,7 +69,7 @@
 
         <div id="banner">
           <div id="header">
-            <a id="logo" href="/"><img src="{{ STATIC_URL }}/images/logo.png" alt="webEval" height="61" width="350"></a>
+            <a id="logo" href="/"><img src="{{ STATIC_URL }}images/logo.png" alt="webEval" height="61" width="350"></a>
           </div>
           <form id="search" action="" method="get">
             <div>
@@ -163,15 +163,15 @@
       </div>
     </div>
 
-  <script type="text/javascript" src="{{ STATIC_URL }}/javascripts/config.js"></script>
-  <script type="text/javascript" src="{{ STATIC_URL }}/javascripts/application.js"></script>
-  <script type="text/javascript" src="{{ STATIC_URL }}/javascripts/roundtimer.js"></script>
-  <script type="text/javascript" src="{{ STATIC_URL }}/javascripts/sorttable.js"></script>
-  <script type="text/javascript" src="{{ STATIC_URL }}/javascripts/foreach.js"></script>
-  <script type="text/javascript" src="{{ STATIC_URL }}/javascripts/submit_form.js"></script>
-  <script type="text/javascript" src="{{ STATIC_URL }}/javascripts/highcharts/js/highcharts.js"></script>
-  <script type="text/javascript" src="{{ STATIC_URL }}/javascripts/auth_menu.js"></script>
-  <script type="text/javascript" src="{{ STATIC_URL }}/javascripts/registration.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}javascripts/config.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}javascripts/application.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}javascripts/roundtimer.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}javascripts/sorttable.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}javascripts/foreach.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}javascripts/submit_form.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}javascripts/highcharts/js/highcharts.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}javascripts/auth_menu.js"></script>
+  <script type="text/javascript" src="{{ STATIC_URL }}javascripts/registration.js"></script>
   {% block extra_js %}{% endblock %}
   </body>
 </html>

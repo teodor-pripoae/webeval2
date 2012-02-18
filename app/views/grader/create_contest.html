@@ -2,9 +2,9 @@
 {% block title %}
 	Create contest
 {% endblock %}
-    
+
 {% block wiki_page %}
-	<form method="post" action="{% url webEval.web_eval__core.grader__controller.create_contest %}">{% csrf_token %}
+	<form method="post" action="{% url create_contest %}">{% csrf_token %}
 		<fieldset>
 			<legend>Create contest</legend>
 			<label for="title">Code</label><br>

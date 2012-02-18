@@ -77,7 +77,7 @@ def create_problem (request):
             os.system("touch %s" % os.path.join(TESTS_DIR, problem.code, 'tests.txt'))
             os.system("svn add %s" % os.path.join(TESTS_DIR, problem.code))
 
-            return HttpResponseRedirect(reverse('app.grader__controller.configure_problem',
+            return HttpResponseRedirect(reverse('configure_problem',
                                                 kwargs={'problem_code' : problem.code}
                                                )
                                        )
@@ -116,7 +116,7 @@ def create_contest (request):
             contest.wiki_page = create_contest_wiki_page(contest, request)
             contest.save()
 
-            return HttpResponseRedirect(reverse('app.grader__controller.display_contest',
+            return HttpResponseRedirect(reverse('display_contest',
                                                 kwargs = {'contest_code' : contest.code }))
 
     else:
@@ -454,7 +454,7 @@ def submit (request):
             job.save()
             save_file(dest = os.path.join(JOBS_DIR, "job%d.%s" % (job.id, job.language)), file = request.FILES['solution'])
 
-            return HttpResponseRedirect(reverse('app.grader__controller.status') + '?problem=%s&user=%s' % (job.problem.code, user.username))
+            return HttpResponseRedirect(reverse('status') + '?problem=%s&user=%s' % (job.problem.code, user.username))
     else:
         form = JobSubmitForm()
 
@@ -518,7 +518,7 @@ def display_contest_standings (request, contest_code):
 
 
 @login_required
-def toogle_contest_registration (request, contest_code):
+def toggle_contest_registration (request, contest_code):
     user = user_auth(request)
     contest = get_object_or_404(Contest, code = contest_code)
 
@@ -527,7 +527,7 @@ def toogle_contest_registration (request, contest_code):
             contest.registered_users.remove(user)
         else:
             contest.registered_users.add(user)
-    return HttpResponseRedirect(reverse('app.grader__controller.display_contest',
+    return HttpResponseRedirect(reverse('display_contest',
                                        kwargs = {'contest_code' : contest.code }
                                       )
                                )

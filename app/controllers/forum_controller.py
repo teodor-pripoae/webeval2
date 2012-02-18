@@ -105,7 +105,7 @@ def new_topic (request, board_id):
             user.forum_posts += 1
             user.save()
 
-            return HttpResponseRedirect(reverse('app.forum__controller.display_topic',
+            return HttpResponseRedirect(reverse('display_topic',
                                                 kwargs={'topic_id' : topic.id}))
     else:
         form = ForumTopicCreateForm()
@@ -136,7 +136,7 @@ def edit_post (request, post_id):
         form = ForumPostEditForm(request.POST, instance = post)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse("app.forum__controller.display_topic",
+            return HttpResponseRedirect(reverse("display_topic",
                                                 kwargs={'topic_id' : post.topic.id }) + "#%d" % post.id)
     else:
         form = ForumPostEditForm(post)
@@ -197,7 +197,7 @@ def delete_post (request, post_id):
 
     post.delete()
 
-    return HttpResponseRedirect(reverse("app.forum__controller.display_topic",
+    return HttpResponseRedirect(reverse("display_topic",
                                                 kwargs={'topic_id' : topic.id }))
 
 
@@ -230,7 +230,7 @@ def reply (request, topic_id):
             user.forum_posts += 1
             user.save()
 
-            return HttpResponseRedirect(reverse('app.forum__controller.display_topic',
+            return HttpResponseRedirect(reverse('display_topic',
                                                 kwargs={'topic_id' : topic.id}))
     else:
         form = ForumPostReplyForm()

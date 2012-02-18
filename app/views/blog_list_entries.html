@@ -8,15 +8,15 @@
 {% endblock %}
 
 {% block content %}
-    {% for entry in blog_entries %}
-        <div>
-            <a href="{% url webEval.web_eval__core.blog__controller.display_entry username=entry.author.username permalink=entry.permalink %}">
-                <h3>{{ entry.title }}</h3>
-            </a>
-            by <b>{{ entry.author.username}}</b> on <b>{{ entry.date }}</b>
-            <br><br>
-            {{ entry.content}}
-            <br><br><br>
-        </div>
-    {% endfor %}
+  {% for entry in blog_entries %}
+    <div class="blog_entry">
+      <a href="{% url display_entry username=entry.author.username permalink=entry.permalink %}">
+        <h3>{{ entry.title }}</h3>
+      </a>
+        by <b>{{ entry.author.username}}</b> on <b>{{ entry.date }}</b>
+      <br><br>
+      {{ entry.content}}
+      <br><br><br>
+    </div>
+  {% endfor %}
 {% endblock %}

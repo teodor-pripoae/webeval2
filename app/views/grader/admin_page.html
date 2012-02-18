@@ -11,13 +11,13 @@
 	<h2>Create</h2>
 	<ul>
 		<li>
-			<a href="{% url webEval.web_eval__core.grader__controller.create_contest %}">Create contest</a>
+			<a href="{% url create_contest %}">Create contest</a>
 		</li>
 		<li>
-			<a href="{% url webEval.web_eval__core.grader__controller.create_problem %}">Create problem</a>
+			<a href="{% url create_problem %}">Create problem</a>
 		</li>
 	</ul>
-	
+
 	<h2>Last created users</h2>
 	<table width="100%" id="last_created_users">
 		<thead>
@@ -31,18 +31,18 @@
 			{% for user in last_users %}
 				<tr>
 					<td class="admin_user_id">#{{ user.id }}</td>
-					<td class="admin_user_name"><a href="{% url webEval.web_eval__core.user__controller.display_user user_name=user.username %}">{{ user.first_name }} {{ user.last_name }}</a></td>
-					<td class="admin_user_username"><a href="{% url webEval.web_eval__core.user__controller.display_user user_name=user.username %}">{{ user.username }}</a></td>
+					<td class="admin_user_name"><a href="{% url display_user user_name=user.username %}">{{ user.first_name }} {{ user.last_name }}</a></td>
+					<td class="admin_user_username"><a href="{% url display_user user_name=user.username %}">{{ user.username }}</a></td>
 					<td class="admin_user_ip">{{ user.ip_joined }}</td>
 					<td class="admin_user_date_joined">{{ user.date_joined }}</td>
 				</tr>
 			{% endfor %}
 		</tbody>
 	</table>
-	
+
 	<h2>Tickets</h2>
 	<h3>Milestones</h3>
-	
+
 	<table class="display_milestones">
 		<thead>
 			<th width="20%">Name</th>
@@ -66,7 +66,7 @@
 				<td style="text-align: center"><a href="">Edit</a> | <a href="">Delete</a></td>
 			</tr>
 		{% endfor %}
-		<form method="POST" action="{% url webEval.web_eval__core.grader__controller.admin_page %}">
+		<form method="POST" action="{% url admin_page %}">
 			<tr>
 				{{ milestone_form.errors }}
 				<td><input type="text" name="name" value="{{ milestone_form.data.name }}" /></td>

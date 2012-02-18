@@ -3,7 +3,7 @@
 <table width="100%" class="forum_post" id="post{{ post.id }}">
 	<tr>
   		<td class="forum_post_user_from" width="15%">
-  			<a href="{% url webEval.web_eval__core.user__controller.display_user user_name=post.user_from.username %}">{{ post.user_from.username }}</a>	
+  			<a href="{% url display_user user_name=post.user_from.username %}">{{ post.user_from.username }}</a>
   		</td>
   		<td class="forum_post_title_bar">
   			<div class="display_left"><b>Post subject</b>: {{ post.title }}</div>
@@ -13,7 +13,7 @@
   	<tr>
   		<td class="forum_post_sidebar">
   			<div class="forum_post_display_avatar">
-  				<img src="{{ MEDIA_URL }}/images/avatar/{{ post.user_from.username }}_100px.jpeg">
+  				<img src="{{ STATIC_URL }}images/avatar/{{ post.user_from.username }}_100px.jpeg">
   			</div>
   			<div class="forum_post_display_user_details">
   				<b>Joined: </b> {{ post.user_from.date_joined }} <br/>
@@ -37,8 +37,8 @@
   			<div class="forum_post_display_panel display_right">
   			{% if request.user.is_authenticated %}
 			    <span class="menuitem postmenuitem-replyto">
-			    	<a href="" class="nav" rel="nofollow">Reply</a> 
-			    </span> 			
+			    	<a href="" class="nav" rel="nofollow">Reply</a>
+			    </span>
 			{% endif %}
   			</div>
   		</td>

@@ -2,11 +2,11 @@
 <table class="compact" cellspacing="0">
 	<tr>
 		<td align="center" rowspan="5">
-			<a href="{% url webEval.web_eval__core.user__controller.get_avatar user_name=user.username %}">
-				<img src="{{ MEDIA_URL }}/images/avatar/{{ user.username }}_medium.jpeg" alt="" />
+			<a href="{% url get_avatar user_name=user.username %}">
+				<img src="{{ STATIC_URL }}images/avatar/{{ user.username }}_medium.jpeg" alt="" />
 			</a>
 			<br />
-			<a href="{% url webEval.web_eval__core.grader__controller.status %}?user={{ user.username }}">Browse submissions</a><br />
+			<a href="{% url grader_status %}?user={{ user.username }}">Browse submissions</a><br />
 		</td>
 		<th>Name</th>
 		<td>{{ user.first_name }} {{ user.last_name }}</td>
@@ -25,19 +25,19 @@
 	<tr>
 		<th>Forum</th>
 		<td>
-			<a href="{% url webEval.web_eval__core.user__controller.new_private_message %}?to={{ user.username }}">send private message</a>,
+			<a href="{% url new_private_message %}?to={{ user.username }}">send private message</a>,
 		</td>
 	</tr>
 </table>
 <ul class="htabs">
 	<li {% if not rating and not statistics %}class="active"{% endif %}>
-		<a href="{% url webEval.web_eval__core.user__controller.display_user user_name=user.username %}">Profile</a>
+		<a href="{% url display_user user_name=user.username %}">Profile</a>
 	</li>
 	<li {% if rating %}class="active"{% endif %}>
-		<a href="{% url webEval.web_eval__core.user__controller.display_user_rating user_name=user.username %}">Rating</a>
+		<a href="{% url display_user_rating user_name=user.username %}">Rating</a>
 	</li>
 	<li {% if statistics %}class="active"{% endif %}>
-		<a href="{% url webEval.web_eval__core.user__controller.display_user_statistics user_name=user.username %}">Statistics</a>
+		<a href="{% url display_user_statistics user_name=user.username %}">Statistics</a>
 	</li>
 	<li>
 		<a href="{% url blog_posts username=user.username %}">Blog</a>

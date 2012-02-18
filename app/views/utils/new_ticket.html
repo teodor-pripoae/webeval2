@@ -6,7 +6,7 @@
 
 {% block wiki_page %}
 	<h1>New ticket</h1>
-	<form method="post" action="{% url webEval.web_eval__core.utils__controller.new_ticket %}">
+	<form method="post" action="{% url new_ticket %}">
         {% csrf_token %}
 			<ul class="form">
 				<li>
@@ -22,12 +22,12 @@
 					<select name="type" id="form_ticket_type">
 					{% for option in ticket_types %}
 						<option value="{{ option }}">{{ option }}</option>
-					{% endfor %} 
+					{% endfor %}
 					</select>
 				</li>
 				<li>
 					<input type="submit" value="Submit" title="Submit" />
 				</li>
-			</ul> 
+			</ul>
 	</form>
 {% endblock %}

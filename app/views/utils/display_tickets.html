@@ -7,7 +7,7 @@
 {% block wiki_page %}
 
 <div class="display_tickets">
-	<span style="float: right"><a href="{% url webEval.web_eval__core.utils__controller.new_ticket %}">Add ticket</a></span>
+	<span style="float: right"><a href="{% url new_ticket %}">Add ticket</a></span>
 
 <h2>Open Tickets</h2>
 {% if tickets %}
@@ -21,13 +21,13 @@
 			<th id="ticket_type_td">Severity</th>
 			<th id="ticket_type_td">Milestone</th>
 		</thead>
-		
+
 		<tbody>
 		{% for ticket in tickets %}
 			<tr class="ticket_severity_{{ ticket.severity }}">
-				<td id="ticket_id_td"><a href="{% url webEval.web_eval__core.utils__controller.display_ticket ticket_id=ticket.id %}">#{{ ticket.id }}</a></td>
-				<td id="ticket_title_td"><a href="{% url webEval.web_eval__core.utils__controller.display_ticket ticket_id=ticket.id %}">{{ ticket.title }}</a></td>
-				<td>{% if ticket.assignee %}<a href="{% url webEval.web_eval__core.user__controller.display_user user_name=ticket.assignee.username %}">{{ ticket.assignee.username }}</a>{% else %}-{% endif %}</td>
+				<td id="ticket_id_td"><a href="{% url display_ticket ticket_id=ticket.id %}">#{{ ticket.id }}</a></td>
+				<td id="ticket_title_td"><a href="{% url display_ticket ticket_id=ticket.id %}">{{ ticket.title }}</a></td>
+				<td>{% if ticket.assignee %}<a href="{% url display_user user_name=ticket.assignee.username %}">{{ ticket.assignee.username }}</a>{% else %}-{% endif %}</td>
 				<td>{{ ticket.status }}</td>
 				<td>{{ ticket.type }}</td>
 				<td>{{ ticket.severity }}</td>
@@ -54,13 +54,13 @@
 			<th id="ticket_type_td">Severity</th>
 			<th id="ticket_type_td">Milestone</th>
 		</thead>
-		
+
 		<tbody>
 		{% for ticket in closed_tickets %}
 			<tr class="ticket_severity_{{ ticket.severity }}">
-				<td id="ticket_id_td"><a href="{% url webEval.web_eval__core.utils__controller.display_ticket ticket_id=ticket.id %}">#{{ ticket.id }}</a></td>
-				<td id="ticket_title_td"><a href="{% url webEval.web_eval__core.utils__controller.display_ticket ticket_id=ticket.id %}">{{ ticket.title }}</a></td>
-				<td>{% if ticket.assignee %}<a href="{% url webEval.web_eval__core.user__controller.display_user user_name=ticket.assignee.username %}">{{ ticket.assignee.username }}</a>{% else %}-{% endif %}</td>
+				<td id="ticket_id_td"><a href="{% url display_ticket ticket_id=ticket.id %}">#{{ ticket.id }}</a></td>
+				<td id="ticket_title_td"><a href="{% url display_ticket ticket_id=ticket.id %}">{{ ticket.title }}</a></td>
+				<td>{% if ticket.assignee %}<a href="{% url display_user user_name=ticket.assignee.username %}">{{ ticket.assignee.username }}</a>{% else %}-{% endif %}</td>
 
 				<td>{{ ticket.status }}</td>
 				<td>{{ ticket.type }}</td>

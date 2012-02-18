@@ -14,7 +14,7 @@ from app.models import *
 
 
 def redirect_to_index(message):
-    return HttpResponseRedirect(reverse('app.wiki__controller.dashboard') + "?error_message=%s" % message)
+    return HttpResponseRedirect(reverse('dashboard') + "?error_message=%s" % message)
 
 def redirect_with_message(page, message):
     return HttpResponseRedirect(page + "?error_message=%s" % message)
@@ -49,7 +49,7 @@ def new_ticket (request):
             ticket.author = user
             ticket.date_posted = datetime.datetime.now()
             ticket.save()
-            return HttpResponseRedirect(reverse('app.utils__controller.tickets'))
+            return HttpResponseRedirect(reverse('tickets'))
     else:
         form = TicketForm()
 
@@ -110,7 +110,7 @@ def edit_ticket (request, ticket_id):
     user = user_auth(request)
 
     if user.is_superuser is False and user != ticket.author:
-        return redirect_with_message(reverse("app.utils__controller.tickets"),
+        return redirect_with_message(reverse("tickets"),
                                      "You don't have enough permissions to edit this ticket.")
 
     if request.method == 'POST':
@@ -155,7 +155,7 @@ def edit_ticket (request, ticket_id):
                 comment.save()
             print changed
             form.save()
-            return HttpResponseRedirect(reverse('app.utils__controller.display_ticket',
+            return HttpResponseRedirect(reverse('display_ticket',
                                                 kwargs={'ticket_id' : ticket.id }
                                                )
                                        )
@@ -196,7 +196,7 @@ def delete_comment (request, ticket_id, comment_id=None):
 
         for pk in pklst:
             TicketComment.objects.get(pk=pk).delete()
-        return HttpResponseRedirect(reverse("app.utils__controller.display_ticket",
+        return HttpResponseRedirect(reverse("display_ticket",
                                             kwargs={
                                                     'ticket_id' : ticket.id,
                                             }

@@ -5,9 +5,9 @@
 {% endblock %}
 
 {% block wiki_page %}
-	<h1>Edit ticket <a href="{% url webEval.web_eval__core.utils__controller.display_ticket ticket_id=ticket.id %}">#{{ ticket.id }}</a></h1>
+	<h1>Edit ticket <a href="{% url display_ticket ticket_id=ticket.id %}">#{{ ticket.id }}</a></h1>
 	{{ form.errors }}
-	<form method="post" action="{% url webEval.web_eval__core.utils__controller.edit_ticket ticket_id=ticket.id%}">
+	<form method="post" action="{% url edit_ticket ticket_id=ticket.id%}">
         {% csrf_token %}
 			<ul class="form">
 				<li>
@@ -29,8 +29,8 @@
 									<option value="{{ option }}" {% if form.data.type == option %}selected{% endif %}>{{ option }}</option>
 								{% endfor %}
 								</select>
-							</td> 
-							
+							</td>
+
 							<td>
 								<label for="form_severity">Severity</label>
 								<select name="severity" id="form_ticket_severity">
@@ -38,8 +38,8 @@
 									<option value="{{ option }}" {% if form.data.severity == option %}selected{% endif %}>{{ option }}</option>
 								{% endfor %}
 								</select>
-							</td> 
-							
+							</td>
+
 							<td>
 								<label for="form_status">Status</label>
 								<select name="status" id="form_ticket_status">
@@ -48,16 +48,16 @@
 								{% endfor %}
 								</select>
 							</td>
-							
+
 							<td>
 								<label for="form_milestone">Milestone</label>
 								<select name="milestone" id="form_ticket_milestone">
 								{% for milestone in ticket_milestones %}
-									<option value="{{ milestone.id }}" {% if form.data.milestone == milestone %}selected{% endif %}>{{ milestone.name }}</option> 
+									<option value="{{ milestone.id }}" {% if form.data.milestone == milestone %}selected{% endif %}>{{ milestone.name }}</option>
 								{% endfor %}
 								</select>
 							</td>
-							
+
 							<td>
 								<label for="form_assignee">Assignee</label>
 								<select name="assignee" id="form_ticket_assignee" style="width: auto">
@@ -66,7 +66,7 @@
 									<option value="{{ developer.id }}" {% if form.data.assignee == developer %}selected{% endif %}>{{ developer.first_name }} {{ developer.last_name }}</option>
 								{% endfor %}
 								</select>
-							</td> 
+							</td>
 						</tr>
 					</table>
 				</li>
@@ -74,6 +74,6 @@
 					<div class="clear"></div>
 					<input type="submit" value="Submit" title="Submit" />
 				</li>
-			</ul> 
+			</ul>
 	</form>
 {% endblock %}
