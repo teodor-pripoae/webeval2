@@ -281,5 +281,3 @@ class CountryField(models.CharField):
     def get_internal_type(self):
         return "CharField"
 
-from south.modelsinspector import add_ignored_fields
-add_ignored_fields(["^webEval\.web_eval__core\.fields.CountryField"])

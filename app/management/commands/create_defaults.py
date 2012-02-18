@@ -4,8 +4,8 @@ import hashlib
 from django.core.management.base import BaseCommand, CommandError
 from django.core.urlresolvers import reverse
 
-from webEval.web_eval__core.models import *
-from webEval.settings import HOST_URL
+from app.models import *
+from settings import HOST_URL
 
 class Command(BaseCommand):
     help = 'Creates default entries in database, like default contest, default blog entry, etc'
@@ -14,26 +14,26 @@ class Command(BaseCommand):
         # Make the first user in system admin.
         try:
             user = User.objects.get()
-            
+
             print "Setting admin flag for user '%s' to true" % user.username
             user.is_superuser = True
-            
+
             print "Setting staff flag for user '%s' to true" % user.username
             user.is_staff = True
-            
+
             print "Setting active flag to user '%s' to true" % user.username
             user.is_active = True
-            
+
             user.save()
-            
+
             print "Saving user '%s', continuing...\n" % user.username
         except:
             print "Cannot get first user, please go to %s%s and register it" % (HOST_URL,
-                                                                                 reverse("webEval.web_eval__core.auth__controller.register"))
+                                                                                 reverse("register"))
             return
-        
+
         user = UserProfile.objects.get()
-        
+
         try:
             default_contest = Contest.objects.get(code='none')
             print "Default contest found, continuing...\n"
@@ -41,13 +41,13 @@ class Command(BaseCommand):
             default_contest = Contest()
             default_contest__wiki_page = WikiPage()
             default_contest__wiki_first_revision = WikiRevision()
-            
-            default_contest__wiki_page.url = reverse("webEval.web_eval__core.grader__controller.display_contest",
+
+            default_contest__wiki_page.url = reverse("display_contest",
                                                      kwargs = {'contest_code' : 'default'}).lstrip('/').rstrip('/')
             default_contest__wiki_page.author = user
             print "Creating wiki page for default contest"
             default_contest__wiki_page.save()
-            
+
             default_contest__wiki_first_revision.revision_id = 1
             default_contest__wiki_first_revision.date = datetime.datetime.now()
             default_contest__wiki_first_revision.ip = '127.0.0.1'
@@ -63,7 +63,7 @@ class Command(BaseCommand):
             default_contest__wiki_first_revision.save()
             default_contest__wiki_page.last_revision = default_contest__wiki_first_revision
             default_contest__wiki_page.save()
-            
+
             default_contest.name = 'Default'
             default_contest.code = 'none'
             default_contest.start_time = datetime.datetime.now()
@@ -74,8 +74,8 @@ class Command(BaseCommand):
             default_contest.with_open_eval = True
             print "Creating default contest, continuing...\n"
             default_contest.save()
-            
-            
+
+
         try:
             forum_index = ForumBoard.objects.get(id=1)
             print "Forum board found, continuing...\n"
@@ -89,8 +89,8 @@ class Command(BaseCommand):
             forum_index.public = True
             print "Saving forum index...\n"
             forum_index.save()
-            
-        
+
+
         welcome_blog_post = BlogEntry()
         welcome_blog_post.title = 'Successful install'
         welcome_blog_post.content = 'You have successfully installed webEval.'
@@ -101,6 +101,6 @@ class Command(BaseCommand):
         welcome_blog_post.save()
         print "Adding greeting to dashboard,...\n"
         DashboardEntry(blog_entry=welcome_blog_post).save()
-        
+
         print "Done!\n"
-        
+

@@ -1,7 +1,6 @@
-
 from django.contrib import admin
 
-from webEval.web_eval__core.models import *
+from app.models import *
 
 admin.site.register(ForumBoard)
 admin.site.register(ForumTopic)

@@ -1,3 +1,5 @@
+import os
+
 ATTACHMENTS_DIR = os.path.join(os.path.dirname(__file__), '..', 'files', 'attachments')
 TESTS_DIR = os.path.join(os.path.dirname(__file__), '..', 'files', 'tests')
 JOBS_DIR = os.path.join(os.path.dirname(__file__), '..', 'files', 'jobs')

@@ -1,4 +1,9 @@
 django
 south
+python-openid
+django-openid
 django_openid_auth
+django-authopenid
 recaptcha-client
+creoleparser
+pygments

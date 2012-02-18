@@ -1,7 +1,7 @@
 import creoleparser
 
 from django import template
-from webEval.web_eval__core.wiki__helper import *
+from app.helpers.wiki import *
 register = template.Library()
 
 # translates creole syntax to html
@@ -24,9 +24,9 @@ register.filter('security_types', security_types)
 def first_characters(value, number):
     return value[:number]
 register.filter('first_characters', first_characters)
-    
+
 # markup
 def webEval_markup(value):
     return markup(value)
 register.filter('webEval_markup', webEval_markup)
-    
+
