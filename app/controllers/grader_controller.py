@@ -16,12 +16,14 @@ from django.core.exceptions import PermissionDenied
 from django.core.paginator import Paginator
 from django.core.urlresolvers import resolve
 from django.template import RequestContext, Context
-from django.shortcuts import get_object_or_404, render_to_response
+from django.shortcuts import get_object_or_404, render_to_response, redirect
 from django.views.decorators.csrf import csrf_protect
 
 from pygments import highlight
 from pygments.lexers import get_lexer_by_name
 from pygments.formatters import HtmlFormatter
+
+from annoying.decorators import render_to
 
 import config
 from settings import JOBS_DIR, TESTS_DIR
@@ -35,7 +37,9 @@ from app.forms import *
 from app.controllers.utils_controller import redirect_to_index
 from app.controllers.wiki_controller import edit_page, display_revision
 
+
 @login_required
+@render_to("grader/create_problem.html")
 def create_problem (request):
     user = user_auth(request)
 
@@ -78,26 +82,22 @@ def create_problem (request):
             os.system("touch %s" % os.path.join(TESTS_DIR, problem.code, 'tests.txt'))
             os.system("svn add %s" % os.path.join(TESTS_DIR, problem.code))
 
-            return HttpResponseRedirect(reverse('configure_problem',
-                                                kwargs={'problem_code' : problem.code}
-                                               )
-                                       )
+            return redirect(reverse('configure_problem', kwargs={'problem_code' : problem.code}))
     else:
         form = ProblemCreateForm()
 
-    return render_to_response("grader/create_problem.html",
-                             {
-                                'form' : form,
-                                'navigation' :
-                                {
-                                    'main' : 'admin',
-                                    'other' : 'create-problem'
-                                }
-                             },
-                             context_instance=RequestContext(request))
+    return {
+        'form' : form,
+        'navigation' :
+        {
+            'main' : 'admin',
+            'other' : 'create-problem'
+        }
+    }
 
 
 @login_required
+@render_to("grader/create_contest.html")
 def create_contest (request):
     user = user_auth(request)
 
@@ -117,26 +117,23 @@ def create_contest (request):
             contest.wiki_page = create_contest_wiki_page(contest, request)
             contest.save()
 
-            return HttpResponseRedirect(reverse('display_contest',
-                                                kwargs = {'contest_code' : contest.code }))
+            return redirect(reverse('display_contest', kwargs={'contest_code': contest.code }))
 
     else:
         form = ContestCreateForm()
 
-    return render_to_response("grader/create_contest.html",
-                              {
-                                    'form': form,
-                                    'navigation' :
-                                    {
-                                        'main' : 'admin',
-                                        'other' : 'create-contest'
-                                    }
-                              },
-                              context_instance = RequestContext(request)
-                             )
+    return {
+        'form': form,
+        'navigation' :
+        {
+            'main' : 'admin',
+            'other' : 'create-contest'
+        }
+    }
 
 
 @login_required
+@render_to("grader/configure_contest.html")
 def configure_contest (request, contest_code):
     user = user_auth(request)
 
@@ -165,21 +162,20 @@ def configure_contest (request, contest_code):
         form = ContestEditForm(contest)
 
     #print form.data['start_time']
-    return render_to_response('grader/configure_contest.html',
-                              {
-                                    'contest' : contest,
-                                    'all_problems' : Problem.objects.all(),
-                                    'form' : form,
-                                    'message' : message,
-                                    'navigation' : {
-                                        'main' : 'admin',
-                                        'other': 'edit-contest',
-                                    }
-                              },
-                              context_instance = RequestContext(request))
+    return {
+        'contest' : contest,
+        'all_problems' : Problem.objects.all(),
+        'form' : form,
+        'message' : message,
+        'navigation' : {
+            'main' : 'admin',
+            'other': 'edit-contest',
+        }
+    }
 
 
 @login_required
+@render_to("grader/configure_problem.html")
 def configure_problem (request, problem_code):
     user = user_auth(request)
 
@@ -240,19 +236,17 @@ def configure_problem (request, problem_code):
     else:
         form = ProblemEditForm(problem)
 
-    return render_to_response('grader/configure_problem.html',
-                              {
-                                    'problem' : problem,
-                                    'contests' : Contest.objects.all(),
-                                    'tests' : tests,
-                                    'form' : form,
-                                    'message' : message,
-                                    'navigation' : {
-                                        'main' : 'admin',
-                                        'other' : 'configure-problem',
-                                    }
-                              },
-                              context_instance = RequestContext(request))
+    return {
+        'problem' : problem,
+        'contests' : Contest.objects.all(),
+        'tests' : tests,
+        'form' : form,
+        'message' : message,
+        'navigation' : {
+            'main' : 'admin',
+            'other' : 'configure-problem',
+        }
+    }
 
 
 @login_required
@@ -266,6 +260,7 @@ def edit_problem_statement (request, problem_code):
                       }
                      )
 
+
 @login_required
 def edit_contest_statement (request, contest_code):
     contest = get_object_or_404(Contest, code = contest_code)
@@ -278,7 +273,9 @@ def edit_contest_statement (request, contest_code):
                      )
 
 
+
 @login_required
+@render_to("grader/edit_problem_tags.html")
 def edit_problem_tags (request, problem_code):
     user = user_auth(request)
 
@@ -286,16 +283,14 @@ def edit_problem_tags (request, problem_code):
         return redirect_to_index("You don't have permission to edit problems.")
 
     problem = get_object_or_404(Problem, code = problem_code)
-    return render_to_response('grader/edit_problem_tags.html',
-                              {
-                                    'problem' : problem,
-                                    'navigation' : {
-                                        'main' : 'judge',
-                                        'other' : 'edit-problem-tags',
-                                    }
-                              },
-                              context_instance = RequestContext(request)
-                             )
+
+    return {
+        'problem' : problem,
+        'navigation' : {
+            'main' : 'judge',
+            'other' : 'edit-problem-tags',
+        }
+    }
 
 
 def display_problem (request, problem_code):
@@ -313,6 +308,7 @@ def display_problem (request, problem_code):
                             context_instance = RequestContext(request),
                            )
 
+
 def display_contest (request, contest_code):
     user = user_auth (request)
     contest = get_object_or_404 (Contest, code = contest_code)
@@ -328,6 +324,7 @@ def display_contest (request, contest_code):
 
 
 @login_required
+@render_to("grader/display_job.html")
 def display_job (request, job_id):
     user = user_auth (request)
     job = get_object_or_404(Job, id=job_id)
@@ -335,19 +332,18 @@ def display_job (request, job_id):
     if job.can_view(user) is False:
         return redirect_to_index("You don't have permission to view this job")
 
-    return render_to_response("grader/display_job.html",
-                              {
-                                    'job' : job,
-                                    'tests' : Test.objects.filter(job=job).order_by('no'),
-                                    'navigation' : {
-                                        'main' : 'judge',
-                                        'other' : 'display-job',
-                                    }
-                              },
-                              context_instance = RequestContext(request))
+    return {
+        'job' : job,
+        'tests' : Test.objects.filter(job=job).order_by('no'),
+        'navigation' : {
+            'main' : 'judge',
+            'other' : 'display-job',
+        }
+    }
 
 
 @login_required
+@render_to("grader/display_job_source_code.html")
 def display_job_source_code (request, job_id):
     user = user_auth (request)
     job = get_object_or_404(Job, id=job_id)
@@ -359,18 +355,17 @@ def display_job_source_code (request, job_id):
     formatter = HtmlFormatter(linenos=True)
     source_code = highlight(''.join(open(os.path.join(JOBS_DIR, 'job%d.%s' % (job.id, job.language)), 'r').readlines()), lexer, formatter)
 
-    return render_to_response("grader/display_job_source_code.html",
-                              {
-                                'job' : job,
-                                'source_code' : source_code,
-                                'navigation' : {
-                                    'main' : 'judge',
-                                    'other' : 'display-job-source',
-                                }
-                              },
-                              context_instance = RequestContext(request))
+    return {
+        'job' : job,
+        'source_code' : source_code,
+        'navigation' : {
+            'main' : 'judge',
+            'other' : 'display-job-source',
+        }
+    }
 
 
+@render_to("grader/status.html")
 def status (request):
     user, problem, contest = None, None, None
     current_user = user_auth(request)
@@ -421,23 +416,23 @@ def status (request):
             job.save()
             Test.objects.filter(job = job).delete()
 
-    return render_to_response("grader/status.html",
-                              {'paginator' : paginator,
-                               'page' : paginator.page(page_ind).object_list,
-                               'page_ind' : page_ind,
-                               'url' : url,
-                               'user' : user,
-                               'problem' : problem,
-                               'accepted' : True if score_begin == 100 else False,
-                               'navigation' : {
-                                    'main' : 'judge',
-                                    'other' : 'status',
-                                },
-                              },
-                              context_instance = RequestContext(request))
+    return {
+       'paginator' : paginator,
+       'page' : paginator.page(page_ind).object_list,
+       'page_ind' : page_ind,
+       'url' : url,
+       'user' : user,
+       'problem' : problem,
+       'accepted' : True if score_begin == 100 else False,
+       'navigation' : {
+            'main' : 'judge',
+            'other' : 'status',
+        },
+    }
 
 
 @login_required
+@render_to("grader/submit_form.html")
 def submit (request):
     user = user_auth(request)
 
@@ -459,63 +454,59 @@ def submit (request):
     else:
         form = JobSubmitForm()
 
-    return render_to_response("grader/submit_form.html",
-                             {'form' : form,
-                              'compilers' : config.judge.COMPILERS,
-                              'problems' : Problem.objects.all(),
-                              'navigation' : {
-                                  'main' : 'judge',
-                                  'other' : 'display-job',
-                              }
-                             },
-                             context_instance=RequestContext(request))
+    return {
+        'form' : form,
+        'compilers' : config.judge.COMPILERS,
+        'problems' : Problem.objects.all(),
+        'navigation' : {
+            'main' : 'judge',
+            'other' : 'display-job',
+        }
+    }
 
+
+@render_to("grader/display_all_contests.html")
 def display_all_contests (request):
     active_or_upcoming_contests = Contest.objects.filter(end_time__gte = datetime.datetime.now()).order_by('-start_time')
     old_contests = Contest.objects.filter(end_time__lt = datetime.datetime.now()).order_by('-end_time')
 
-    return render_to_response('grader/display_all_contests.html',
-                              {
-                                    'active_or_upcoming_contests' : active_or_upcoming_contests,
-                                    'old_contests' : old_contests,
-                                    'navigation' : {
-                                        'main' : 'judge',
-                                        'other' : 'display-all-contests'
-                                    }
-                              },
-                              context_instance = RequestContext(request),
-                             )
+    return {
+        'active_or_upcoming_contests' : active_or_upcoming_contests,
+        'old_contests' : old_contests,
+        'navigation' : {
+            'main' : 'judge',
+            'other' : 'display-all-contests'
+        }
+    }
 
 
+@render_to("grader/display_registered_users.html")
 def display_contest_registered_users (request, contest_code):
     contest = get_object_or_404(Contest, code = contest_code)
 
-    return render_to_response('grader/display_registered_users.html',
-                              {
-                                    'contest' : contest,
-                                    'navigation' : {
-                                        'main' : 'judge',
-                                        'other' : 'display-job',
-                                    }
-                              },
-                              context_instance = RequestContext(request))
+    return {
+        'contest' : contest,
+        'navigation' : {
+            'main' : 'judge',
+            'other' : 'display-job',
+        }
+    }
 
+
+@render_to("grader/display_standings.html")
 def display_contest_standings (request, contest_code):
     users = User.objects.all()
     contest = get_object_or_404(Contest, code = contest_code)
     score_caches = ScoreCache.objects.filter(contest = contest).order_by('-score')
-    return render_to_response('grader/display_standings.html',
-                              {
-                                    'users' : users,
-                                    'contest' : contest,
-                                    'score_caches' : score_caches,
-                                    'navigation' : {
-                                        'main' : 'judge',
-                                        'other' : 'display_standings'
-                                    }
-                              },
-                              context_instance = RequestContext(request)
-                             )
+    return {
+        'users' : users,
+        'contest' : contest,
+        'score_caches' : score_caches,
+        'navigation' : {
+            'main' : 'judge',
+            'other' : 'display_standings'
+        }
+    }
 
 
 @login_required
@@ -534,46 +525,44 @@ def toggle_contest_registration (request, contest_code):
                                )
 
 
+@render_to("grader/display_problems_by_author.html")
 def display_problems_by_author (request, author_code):
     user = user_auth(request)
     author = get_object_or_404(Author, code = author_code)
     problems = Problem.objects.filter(author = author)
 
-    return render_to_response('grader/display_problems_by_author.html',
-                              {
-                                    'author' : author,
-                                    'problems' : problems,
-                                    'navigation' : {
-                                        'main' : 'judge',
-                                        'other' : 'display-problems-by-author'
-                                    }
-                              },
-                              context_instance = RequestContext(request))
+    return {
+        'author' : author,
+        'problems' : problems,
+        'navigation' : {
+            'main' : 'judge',
+            'other' : 'display-problems-by-author'
+        }
+    }
 
+
+@render_to("grader/get_rounds_for_problem.html")
 def get_rounds_for_problem (request):
     problem = get_object_or_None(Problem, id=request.GET['problem_id']) if request.method == 'GET' and 'problem_id' in request.GET else None
     contests = problem.contest_set.filter(start_time__lte = datetime.datetime.now(), end_time__gte = datetime.datetime.now()) if problem is not None else None
 
-    return render_to_response('grader/get_rounds_for_problem.html',
-                              {'contests' : contests},
-                              context_instance = RequestContext(request))
+    return {'contests' : contests}
 
 
+@render_to("grader/display_ranks.html")
 def ranks (request):
     users = UserProfile.objects.all().order_by('-rating')
-    return render_to_response('grader/display_ranks.html',
-                              {
-                                    'users' : users,
-                                    'navigation' : {
-                                            'main' : 'judge',
-                                            'other' : 'display_ranks',
-                                    }
-                              },
-                              context_instance = RequestContext(request)
-                             )
+    return {
+        'users' : users,
+        'navigation' : {
+                'main' : 'judge',
+                'other' : 'display_ranks',
+        }
+    }
 
 
 @login_required
+@render_to("grader/admin_page.html")
 def admin_page (request):
     user = user_auth(request)
 
@@ -590,16 +579,13 @@ def admin_page (request):
     last_users = UserProfile.objects.all().order_by('-id')[:20]
     last_logins = UserProfile.objects.all().order_by('-last_login')[:20]
 
-    return render_to_response('grader/admin_page.html',
-                              {
-                                    'last_users' : last_users,
-                                    'last_logins' : last_logins,
-                                    'milestones' : TicketMilestone.objects.all().order_by('due'),
-                                    'milestone_form' : form,
-                                    'navigation': {
-                                        'main' : 'admin',
-                                        'other' : 'admin_page',
-                                    }
-                              },
-                              context_instance = RequestContext(request)
-                             )
+    return {
+        'last_users' : last_users,
+        'last_logins' : last_logins,
+        'milestones' : TicketMilestone.objects.all().order_by('due'),
+        'milestone_form' : form,
+        'navigation': {
+            'main' : 'admin',
+            'other' : 'admin_page',
+        }
+    }

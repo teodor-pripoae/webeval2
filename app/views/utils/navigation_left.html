@@ -1,35 +1,29 @@
 <li>
-	<a href="{% url display_contest contest_code="archive" %}">
-		Problem archive
-	</a>
-</li>
+	<a class="btn"href="{% url display_contest contest_code="archive" %}">Problem archive</a>
+</li><br/>
 
 <li>
-	<a href="{% url display_contest contest_code="training" %}">
-		Training archive
-	</a>
-</li>
+	<a class="btn" href="{% url display_contest contest_code="training" %}">Training archive</a>
+</li> <br/>
 
 <li>
-	<a href="{% url display_all_contests %}">
-		Contests
-	</a>
-</li>
+	<a class="btn" href="{% url display_all_contests %}">Contests</a>
+</li> <br/>
 
 <li>
-	<a href="{% url ranks %}">
-		Ranks
-	</a>
-</li>
+	<a class="btn" href="{% url ranks %}">Ranks</a>
+</li> <br/>
 
 <li>
-	 <a href="{% url grader_status %}">
-	 	Status
-	 </a>
-</li>
+  <a class="btn" href="{% url grader_status %}">Status</a>
+</li> <br/>
 
 <li>
-	<a href="{% url submit_source %}">
-		Submit
-	</a>
+	<a class="btn" href="{% url submit_source %}">Submit</a>
+</li> <br/>
+
+{% if request.user.userprofile.developer %}
+<li>
+  <a class="btn" href="{% url tickets %}">Tickets</a>
 </li>
+{% endif %}

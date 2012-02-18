@@ -10,3 +10,4 @@ log/*
 public/static/*
 *nohup.out
 .achievements
+files/tests/*

@@ -1,0 +1,31 @@
+td {font-size:1em;  padding:3px 17px 2px 17px;}
+ul { margin-left: 2em; margin-top: 1em; }
+#summary { background: #e0ebff; }
+#summary h2 { font-weight: normal; color: #666; }
+#content { background:#f6f6f6; }
+#summary table { border:none; background:transparent; }
+input {height: 28px; box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;}
+label {text-align: left !important; font-weight: bold;}
+form .controls {margin-left: 100px !important;}
+
+.margin-top-medium { margin-top: 20px !important; }
+
+.padding-top-small { padding-top: 10px !important; }
+.padding-top-medium { padding-top: 20px !important; }
+.padding-top-big { padding-top: 40px !important; }
+.padding-top-huge { padding-top: 60px !important; }
+
+.left { float: left !important; }
+.right { float: right !important; }
+
+form .span1-5 {width: 70px;}
+form label.error {display: inline; margin-left: 5px; width: auto; font-weight: bold;}
+.span4 {width: 220px !important;}
+.span5 {width: 280px !important;}
+.span6 {width: 340px !important;}
+
+input.span3 {width: 150px !important;}
+input.span4 {width: 210px !important;}
+
+.hidden{ display: none;}
+.container-fluid {margin-top: 100px}

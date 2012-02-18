@@ -1,0 +1,40 @@
+<html>
+  {% load static_includes %}
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+    <title>{% block title %}webEval v2{% endblock %}</title>
+
+    {% stylesheet_include_tag "bootstrap" %}
+    {% stylesheet_include_tag "reset" %}
+  </head>
+
+  <body id="">
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="{% url dashboard %}">webEval</a>
+          <ul class="nav">
+            {% include "utils/navigation_top.html" %}
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="container-fluid">
+      <div class="span3">
+        <div class="well sidebar-nav">
+          <ul class="nav nav-list">
+            {% include "utils/navigation_left.html" %}
+          </ul>
+        </div>
+      </div>
+
+      <div class="span10">
+      {% block content %}
+      {% endblock %}
+      </div>
+    </div>
+    {% javascript_include_tag "jquery-1.7.1.min" %}
+  </body>
+</html>

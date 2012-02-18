@@ -1,0 +1,21 @@
+<li {% if navigation.main == "judge" %}class="active"{% endif %}>
+  <a href="{% url display_all_contests %}">Judge</a>
+</li>
+
+<li {% if navigation.main == "blog" %}class="active"{% endif %}>
+  <a href="{% url blog_posts %}">Blog</a>
+</li>
+
+<li {% if navigation.main == "forum" %}class="active"{% endif %}>
+  <a href="{% url display_board board_id=1 %}">Forum</a>
+</li>
+
+<li {% if navigation.main == "wiki" %}class="active"{% endif %}>
+  <a href="{% url wiki_index %}">Wiki</a>
+</li>
+{% if request.user.is_superuser %}
+  <li {% if navigation.main == "admin" %}class="active"{% endif %}>
+    <a href="{% url admin_page %}">Admin</a>
+  </li>
+{% endif %}
+
