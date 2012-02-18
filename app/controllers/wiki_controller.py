@@ -27,6 +27,7 @@ from app.helpers.utils import get_ip_from_request, save_file
 from app.controllers.blog_controller import index
 from app.controllers.utils_controller import redirect_to_index, redirect_with_message
 from app.models import *
+from app.forms import *
 from config.permissions import *
 
 

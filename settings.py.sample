@@ -1,109 +1,102 @@
-# Django settings for webEval project.
-
 import os
-from django.core.urlresolvers import reverse
+import socket
 
-PROJECT_ROOT = os.path.dirname(os.path.realpath(__file__))
-DEBUG = True
-TEMPLATE_DEBUG = DEBUG
-HOST_URL  = 'http://localhost'
-MEDIA_HOST_URL = "%s:8000/static" % HOST_URL
+import djcelery
+djcelery.setup_loader()
+
+import config.databases
+
+from config.apikeys.akismet import *
+from config.apikeys.facebook import *
+from config.apikeys.google import *
+from config.apikeys.reCaptcha import *
+from config.apikeys.twitter import *
+from config.filesystem import *
+
+if socket.gethostname() != 'webeval':
+    DEBUG = True
+    TEMPLATE_DEBUG = DEBUG
+    ENVIRONMENT = 'Development'
+    CELERY_ALWAYS_EAGER = True
+    DATABASES = config.databases.DEVELOPMENT
+    HOST_URL  = 'http://localhost'
+    MEDIA_HOST_URL = "%s:8000/static" % HOST_URL
+else:
+    DEBUG = True
+    TEMPLATE_DEBUG = DEBUG
+    ENVIRONMENT = 'Production'
+    DATABASES = config.databases.PRODUCTION
+    HOST_URL  = 'http://localhost'
+    MEDIA_HOST_URL = "%s:8000/static" % HOST_URL
+
+PROJECT_DIRECTORY = os.path.dirname(__file__)
 
 ADMINS = (
-    # ('Your Name', 'your_email@domain.com'),
+    ('Teodor Pripoae', 'teodor.pripoae@gmail.com')
 )
 
 MANAGERS = ADMINS
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'db.sql',                      # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
-    }
-}
-
-# Local time zone for this installation. Choices can be found here:
-# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
-# although not all choices may be available on all operating systems.
-# On Unix systems, a value of None will cause Django to use the same
-# timezone as the operating system.
-# If running in a Windows environment this must be set to the same as your
-# system time zone.
 TIME_ZONE = 'Europe/Bucharest'
-
-# Language code for this installation. All choices can be found here:
-# http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'en-us'
-
 SITE_ID = 1
-
-# If you set this to False, Django will make some optimizations so as not
-# to load the internationalization machinery.
 USE_I18N = True
-
-# If you set this to False, Django will not format dates, numbers and
-# calendars according to the current locale
 USE_L10N = True
 
-# Absolute path to the directory that holds media.
-# Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = os.path.join(os.path.dirname(__file__), 'public', 'static')
+# Ip's allowed to connect to API
+INTERNAL_IPS=(
+    '127.0.0.1',
+    '192.168.2.102',
+    '192.168.2.103',
+    '192.168.2.104'
+)
 
-# URL that handles the media served from MEDIA_ROOT. Make sure to use a
-# trailing slash if there is a path component (optional in other cases).
-# Examples: "http://media.lawrence.com", "http://example.com/media/"
-MEDIA_URL = '/'.join([MEDIA_HOST_URL])
+MEDIA_ROOT = ''
+MEDIA_URL = ''
 
-# URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
-# trailing slash.
-# Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = '/media/'
+STATIC_ROOT = ''
+STATIC_URL = '/static/'
 
-# Make this unique, and don't share it with anybody.
-SECRET_KEY = '*t!p!h2z!w*09xl00(hukx5+kl%4o^m=&+pj$yxuyrxo-6j$gu'
+ADMIN_MEDIA_PREFIX = '/static/admin/'
+STATICFILES_DIRS = (
+    os.path.join(PROJECT_DIRECTORY, 'public'),
+)
 
-# Make this unique, and don't share it with anybody.
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)
 
-if not hasattr(globals(), 'SECRET_KEY'):
-    SECRET_FILE = os.path.join(PROJECT_ROOT, 'secret.txt')
-    try:
-        SECRET_KEY = open(SECRET_FILE).read().strip()
-    except IOError:
-        try:
-            from random import choice
-            import string
-            symbols = ''.join((string.lowercase, string.digits, string.punctuation ))
-            SECRET_KEY = ''.join([choice(symbols) for i in range(50)])
-            secret = file(SECRET_FILE, 'w')
-            secret.write(SECRET_KEY)
-            secret.close()
-        except IOError:
-            raise Exception('Please create a %s file with random characters to generate your secret key!' % SECRET_FILE)
+SECRET_KEY = '5jrnc_-&v-*$3f25tzo#czzzf3!u*yqy8q8k-y1()#sqz0yo*!'
 
-# List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
 )
 
 MIDDLEWARE_CLASSES = (
-   # 'django.middleware.cache.UpdateCacheMiddleware',
+    #'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    #'django.middleware.csrf.CsrfViewMiddleware',
-    #'django.middleware.csrf.CsrfResponseMiddleware',
-    #'django_authopenid.middleware.OpenIDMiddleware',
+    'app.middleware.keep_me_logged_in.KeepLoggedInMiddleware'
     #'django.middleware.cache.FetchFromCacheMiddleware',
-    'django.middleware.transaction.TransactionMiddleware',
-    #'devserver.middleware.DevServerMiddleware',
+)
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'lib.auth_backend.FacebookBackend',
+    'lib.auth_backend.GoogleBackend',
+    'lib.auth_backend.TwitterBackend',
+)
+
+
+ROOT_URLCONF = 'config.routes'
+
+TEMPLATE_DIRS = (
+    os.path.join(PROJECT_DIRECTORY, 'app', 'views'),
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -112,69 +105,61 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.i18n",
 
     'django.core.context_processors.media',
+    'django.core.context_processors.static',
     "django.contrib.auth.context_processors.auth",
     "django.core.context_processors.request",
 )
 
-LOGGING_CONFIG = None
-LOGIN_URL = '/auth/login'
-LOGIN_REDIRECT_URL = '/auth/successful-login/'
-LOGOUT_URL = '/auth/logout/'
-OPENID_SSO_SERVER_URL = 'https://www.google.com/accounts/o8/id'
-
-ROOT_URLCONF = 'webEval.urls'
-STATIC_DOC_ROOT = os.path.join(os.path.dirname(__file__), 'public', 'static')
-ATTACHMENTS_DIR = os.path.join(os.path.dirname(__file__), 'files', 'attachments')
-TESTS_DIR = os.path.join(os.path.dirname(__file__), 'files', 'tests')
-JOBS_DIR = os.path.join(os.path.dirname(__file__), 'files', 'jobs')
-AVATARS_DIR = os.path.join(os.path.dirname(__file__), 'public', 'static', 'images', 'avatar')
-EVAL_DIR = os.path.join(os.path.dirname(__file__), '..', 'eval')
-
-TEMPLATE_DIRS = (
-    os.path.join(os.path.dirname(__file__), 'public', 'html')
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-)
-
-
-CUSTOM_USER_MODEL = 'webEval.web_eval__core.user__model.UserProfile'
-
-OAUTH_AUTH_VIEW = "piston.authentication.oauth_auth_view"
-OAUTH_CALLBACK_VIEW = "piston.authentication.oauth_user_auth"
-
-AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',
-    'webEval.auth_backend.FacebookBackend',
-    'webEval.auth_backend.GoogleBackend',
-    'webEval.auth_backend.TwitterBackend',
-)
-
-DEVSERVER_MODULES = (
-    'devserver.modules.sql.SQLRealTimeModule',
-    'devserver.modules.sql.SQLSummaryModule',
-    'devserver.modules.profile.ProfileSummaryModule',
-
-    # Modules not enabled by default
-    'devserver.modules.ajax.AjaxDumpModule',
-    #'devserver.modules.profile.MemoryUseModule',
-    'devserver.modules.cache.CacheSummaryModule',
-)
 
 INSTALLED_APPS = (
-    'django.contrib.admin',
     'django.contrib.auth',
-    'django.contrib.comments',
     'django.contrib.contenttypes',
-    'django.contrib.markup',
-    'django.contrib.messages',
     'django.contrib.sessions',
+    'django.contrib.comments',
     'django.contrib.sites',
+    'django.contrib.messages',
+    'django.contrib.markup',
+    'django.contrib.staticfiles',
+    'django.contrib.admin',
     'django_extensions',
-    'django_openid_auth',
-    'captcha',
+    'djcelery',
     'south',
+    'captcha',
+    'django_nose',
+    'annoying',
+    'app',
     'api',
-    'web_eval__core',
 )
 
+NOSE_ARGS = ['-v', '--with-snot', '-s']
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'
+
+LOGIN_URL = '/'
+LOGIN_REDIRECT_URL = '/'
+KEEP_LOGGED_KEY      = 'keep_me_logged' # session key
+KEEP_LOGGED_DURATION = 14               # in days
+
+CELERY_RESULT_BACKEND = "database"
+os.environ["CELERY_LOADER"] = "django"
+BROKER_URL = "amqp://guest:guest@localhost:5672//"
+#CACHE_BACKEND = ''
+#CACHE_BACKEND = 'memcached://127.0.0.1:11211/'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler'
+        }
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    }
+}

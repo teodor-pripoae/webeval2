@@ -102,7 +102,7 @@
                {% endfor %}
                </tbody>
            </table>
-           <p><a href="{% attach page_url=page.url %}">Attach another file.</a></p>
+           <p><a href="{% url attach page_url=page.url %}">Attach another file.</a></p>
            <p><input type="submit" value="Download ZIP archive" class="button" name="download"/></p>
            <p><input type="submit" value="Delete attachments" class="button" name="delete"
            onclick = "return confirm('This action can not be undone! Do you want to continue ?');"/></p>

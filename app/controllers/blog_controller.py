@@ -3,6 +3,7 @@ import hashlib
 import re
 
 from annoying.functions import get_object_or_None
+from annoying.decorators import render_to
 
 from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.contrib.auth import authenticate
@@ -26,6 +27,7 @@ from app.models import *
 from app.controllers.utils_controller import redirect_to_index
 
 
+@render_to('blog/list_entries.html')
 def index (request, username = None):
     username = get_object_or_None(UserProfile, username = username)
     if username is not None:
@@ -39,19 +41,17 @@ def index (request, username = None):
         last_blog_entries = BlogEntry.objects.filter(author = username).order_by('-id')[:10]
 
 
-    return render_to_response('blog/list_entries.html',
-                              {
-                                    'blog_entries' : blog_entries,
-                                    'blog_title' : 'webEval Dashboard' if username is None else "%s's blog" % username.username,
-                                    'last_blog_entries' : last_blog_entries,
-                                    'navigation' :
-                                    {
-                                        'main' : 'blog',
-                                        'other' : 'display-entries',
-                                        'author' : username if username is not None else None,
-                                    }
-                              },
-                              context_instance=RequestContext(request))
+    return {
+        'blog_entries' : blog_entries,
+        'blog_title' : 'webEval Dashboard' if username is None else "%s's blog" % username.username,
+        'last_blog_entries' : last_blog_entries,
+        'navigation' :
+        {
+            'main' : 'blog',
+            'other' : 'display-entries',
+            'author' : username if username is not None else None,
+        }
+    }
 
 
 @csrf_protect

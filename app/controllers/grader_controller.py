@@ -31,6 +31,7 @@ from app.helpers.grader import *
 from app.helpers.wiki import create_problem_wiki_page, create_contest_wiki_page
 from app.helpers.utils import *
 from app.models import *
+from app.forms import *
 from app.controllers.utils_controller import redirect_to_index
 from app.controllers.wiki_controller import edit_page, display_revision
 

@@ -1,5 +1,5 @@
 from piston.handler import BaseHandler
-from webEval.web_eval__core.models import Job
+from app.models import Job
 
 class JobHandler(BaseHandler):
     allowed_methods = ('GET', 'PUT', )
@@ -13,10 +13,10 @@ class JobHandler(BaseHandler):
         """ Edit a job.  """
         attrs = self.flatten_dict(request.POST)
         print "UPDATE ", attrs, request.user
-        
+
         print attrs['id']
         user = request.user
-        
-        return Job.objects.get(id=attrs['id'])    
-    
-    
+
+        return Job.objects.get(id=attrs['id'])
+
+

@@ -57,97 +57,99 @@
 
       <div id="ew-main">
         <div id="ew-content">
-        </div>
 
-        <div id="left">
-          <div class="block">
-            <ul>
-              {% include "utils/navigation_left.html" %}
-            </ul>
-          </div>
-        </div>
-
-        <div id="banner">
-          <div id="header">
-            <a id="logo" href="/"><img src="{{ STATIC_URL }}images/logo.png" alt="webEval" height="61" width="350"></a>
-          </div>
-          <form id="search" action="" method="get">
-            <div>
-              <label for="proj-search">Search:</label>
-              <input type="text" id="proj-search" name="q" size="18" value="">
-              <input type="submit" value="Search">
+          <div id="left">
+            <div class="block">
+              <ul>
+                {% include "utils/navigation_left.html" %}
+              </ul>
             </div>
-          </form>
-
-          <div id="metanav" class="nav">
-            <ul>
-              {% if request.user.is_authenticated %}
-                <li class="first">
-                  <a href="{% url display_user user_name=request.user.username %}">
-                    {{ request.user.first_name }} {{ request.user.last_name }}
-                  </a>
-                </li>
-
-                <li>
-                  <a href="{% url private_messages %}">
-                    Private messages
-                  </a>
-                </li>
-
-                <li class="last">
-                  <a href="{% url logout %}">
-                    Logout
-                  </a>
-                </li>
-              {% else %}
-                <li class="first"><a id="login" href="#">Login</a></li>
-                <li class="last"><a id="register" href="#">Register</a></li>
-              {% endif %}
-            </ul>
           </div>
-        </div>
 
-        <div id="mainnav" class="nav">
-          <ul>
-            {% if navigation.main == "admin" %}
-              {% include "utils/navigation_admin.html" %}
-            {% endif %}
+          <div id="banner">
+            <div id="header">
+              <a id="logo" href="/"><img src="{{ STATIC_URL }}images/logo.png" alt="webEval" height="61" width="350"></a>
+            </div>
+            <form id="search" action="" method="get">
+              <div>
+                <label for="proj-search">Search:</label>
+                <input type="text" id="proj-search" name="q" size="18" value="">
+                <input type="submit" value="Search">
+              </div>
+            </form>
 
-            {% if navigation.main == "forum" %}
-            {% endif %}
+            <div id="metanav" class="nav">
+              <ul>
+                {% if request.user.is_authenticated %}
+                  <li class="first">
+                    <a href="{% url display_user user_name=request.user.username %}">
+                      {{ request.user.first_name }} {{ request.user.last_name }}
+                    </a>
+                  </li>
 
-            {% if navigation.main == "blog" %}
-              {% include "utils/navigation_blog.html" %}
-            {% endif %}
+                  <li>
+                    <a href="{% url private_messages %}">
+                      Private messages
+                    </a>
+                  </li>
 
-            {% block navigation %}
-            {% endblock %}
-          </ul>
-        </div>
+                  <li class="last">
+                    <a href="{% url logout %}">
+                      Logout
+                    </a>
+                  </li>
+                {% else %}
+                  <li class="first"><a id="login" href="#">Login</a></li>
+                  <li class="last"><a id="register" href="#">Register</a></li>
+                {% endif %}
+              </ul>
+            </div>
+          </div>
 
-        <div id="main">
-          <div id="ctxtnav" class="nav">
-           <h2>Context Navigation</h2>
+          <div id="mainnav" class="nav">
             <ul>
-              {% block wiki_navigator %}
+              {% if navigation.main == "admin" %}
+                {% include "utils/navigation_admin.html" %}
+              {% endif %}
+
+              {% if navigation.main == "forum" %}
+              {% endif %}
+
+              {% if navigation.main == "blog" %}
+                {% include "utils/navigation_blog.html" %}
+              {% endif %}
+
+              {% block navigation %}
               {% endblock %}
             </ul>
           </div>
 
-          <div id="content" class="wiki">
-            <div class="wikipage searchable">
-              <div id="wikipage">
-                {% if request.GET.error_message %}
-                  {% with message=request.GET.error_message error=1 %}
-                    {% include "include_template.html" %}
-                  {% endwith %}
-                {% endif %}
-
-                {% block wiki_page %}
+          <div id="main">
+            <div id="ctxtnav" class="nav">
+             <h2>Context Navigation</h2>
+              <ul>
+                {% block wiki_navigator %}
                 {% endblock %}
+              </ul>
+            </div>
+
+            <div id="content" class="wiki">
+              <div class="wikipage searchable">
+                <div id="wikipage">
+                  {% if request.GET.error_message %}
+                    {% with message=request.GET.error_message error=1 %}
+                      {% include "include_template.html" %}
+                    {% endwith %}
+                  {% endif %}
+
+                  {% block wiki_page %}
+                  {% endblock %}
+                </div>
+              </div>
+              <div id="attachments">
               </div>
             </div>
-          <div id="attachments">
+          </div>
         </div>
       </div>
     </div>

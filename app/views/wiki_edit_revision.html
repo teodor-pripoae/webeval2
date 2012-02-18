@@ -88,7 +88,8 @@
       <h1>Create page <a href="{% url display_page page_url=page_url %}">{{ page_url }}</a></h1>
     {% endif %}
 
-    <form accept-charset="utf-8" action="{% if edit %}{% url edit_page page_url=page.url %}{% else %}{% url create_wiki_page %}{% endif %}" method="post" id="form_wikiedit">
+    <form accept-charset="utf-8" action="{% if edit %}{% url edit_wiki_page page_url=page.url %}{% else %}{% url create_wiki_page %}{% endif %}" method="post" id="form_wikiedit">
+      {% csrf_token %}
       <input type="hidden" name="url" value="{{ page_url}}">
       <ul class="form">
         <li id="field_title">

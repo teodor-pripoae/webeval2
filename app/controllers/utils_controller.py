@@ -11,6 +11,7 @@ from annoying.functions import get_object_or_None
 from config.judge import *
 from app.helpers.auth import user_auth
 from app.models import *
+from app.forms import *
 
 
 def redirect_to_index(message):
