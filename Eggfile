@@ -1,4 +1,5 @@
 django
+versiontools
 south
 python-openid
 django_openid_auth
@@ -7,3 +8,8 @@ recaptcha-client
 creoleparser
 pygments
 postmarkup
+django-piston
+django-celery
+werkzeug
+django-annoying
+django-extensions
