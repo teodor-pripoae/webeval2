@@ -13,3 +13,7 @@ django-celery
 werkzeug
 django-annoying
 django-extensions
+django-simple-captcha
+django-nose
+pil
+simplejson
