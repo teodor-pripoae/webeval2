@@ -142,6 +142,15 @@
 - fields: {app_label: djcelery, model: workerstate, name: worker}
   model: contenttypes.contenttype
   pk: 19
+- fields: {expire_date: !!timestamp '2012-03-03 22:23:46.951630', session_data: 'MTUwMGNkNTg5MTQ4NjE2YzE5YzBiYWZkZGExNzQyYjIzMDgxOTBkMzqAAn1xAShVEl9hdXRoX3Vz
+
+      ZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED
+
+      VQ1fYXV0aF91c2VyX2lkcQRLA3Uu
+
+      '}
+  model: sessions.session
+  pk: d816a30fc427e75ef8f2081a387c9444
 - fields: {domain: example.com, name: example.com}
   model: sites.site
   pk: 1
@@ -810,7 +819,7 @@
     is_superuser: true
     last_login: 2012-02-18 21:15:04.471657
     last_name: ''
-    password: bossul
+    password: sha1$ad974$620a5b91f237227b69045c68b54979c9706b8be7
     user_permissions: []
     username: bossul
   model: auth.user
@@ -825,7 +834,7 @@
     is_superuser: true
     last_login: 2012-02-18 21:15:52.911443
     last_name: ''
-    password: panamea
+    password: sha1$f0c07$29e96a5a5be50c02b16d79bd9cb39d7ae7b942d8
     user_permissions: []
     username: toni
   model: auth.user
@@ -838,9 +847,9 @@
     is_active: true
     is_staff: false
     is_superuser: true
-    last_login: 2012-02-18 21:16:24.871686
+    last_login: 2012-02-18 22:23:46.946980
     last_name: ''
-    password: computer1
+    password: sha1$3cc17$760db184371c8d22d194f4f9d92dbfaa4e01463a
     user_permissions: []
     username: hadesgames
   model: auth.user
