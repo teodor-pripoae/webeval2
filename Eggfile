@@ -13,3 +13,4 @@ django-celery
 werkzeug
 django-annoying
 django-extensions
+pyyaml
