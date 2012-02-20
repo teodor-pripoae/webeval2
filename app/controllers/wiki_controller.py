@@ -59,7 +59,6 @@ def create_wiki_page (request, page_url = None):
             revision.author = user
             revision.save()
 
-            page.last_revision = revision
             page.save()
 
             return HttpResponseRedirect(reverse('display_page',
@@ -83,21 +82,20 @@ def edit_page (request, page_url, widgets = {}):
     page = get_object_or_404(WikiPage, url=page_url)
     revisions_list = WikiRevision.objects.filter(wiki_page=page)
 
-    if not page.last_revision.can_edit(user):
+    if not page.last_revision().can_edit(user):
         return redirect_to_index("You don't have enough rights to edit this page, i will redirect you...")
 
     if request.method == 'POST':    # we have some POST data.
         form = WikiRevisionEditForm(request.POST)
         if form.is_valid():
             revision = form.save(commit = False)
-            revision.revision_id = page.last_revision.revision_id + 1
+            revision.revision_id = page.last_revision().revision_id + 1
             revision.date = datetime.datetime.now()
             revision.ip = get_ip_from_request(request)
             revision.wiki_page = page
             revision.author = user
             revision.save()
 
-            page.last_revision = revision
             page.save()
             if 'is_problem' in widgets:
                 return HttpResponseRedirect(reverse('display_problem',
@@ -109,13 +107,14 @@ def edit_page (request, page_url, widgets = {}):
             print form.errors
     else:
         form = WikiRevisionEditForm(page.last_revision)
-
-    can_attach = page.last_revision.wiki_page.can_attach_files(user)
-    can_edit = page.last_revision.can_edit(user)
-    can_view = page.last_revision.can_view(user)
+    # Wtf isn't page.last_revision().wiki_page the same thing as page ?
+    # can_attach = page.last_revision().wiki_page.can_attach_files(user)
+    can_attach = page.can_attach_files(user)
+    can_edit = page.last_revision().can_edit(user)
+    can_view = page.last_revision().can_view(user)
 
     return render_to_response('wiki_edit_revision.html',
-                              {'revision' : page.last_revision,
+                              {'revision' : page.last_revision(),
                                'page' : page,
                                'form' : form,
                                'edit' : True,
@@ -137,7 +136,7 @@ def history (request, page_url, widgets = {}):
     page = get_object_or_404(WikiPage, url = page_url)
     revisions = WikiRevision.objects.filter(wiki_page = page).order_by('-revision_id')
 
-    if page.last_revision.can_view(user) is False:
+    if page.last_revision().can_view(user) is False:
         return redirect_to_index("You don't have enough rights to view this page's history")
 
     problem = get_object_or_None(Problem, wiki_page=page)
@@ -149,10 +148,11 @@ def history (request, page_url, widgets = {}):
     if user_profile is not None:
         widgets['is_user'] = True
         widgets['user'] = user_profile
-
-    can_attach = page.last_revision.wiki_page.can_attach_files(user)
-    can_edit = page.last_revision.can_edit(user)
-    can_view = page.last_revision.can_view(user)
+    # Wtf isn't page.last_revision().wiki_page = page ?
+    # can_attach = page.last_revision().wiki_page.can_attach_files(user)
+    can_attach = page.can_attach_files(user)
+    can_edit = page.last_revision().can_edit(user)
+    can_view = page.last_revision().can_view(user)
 
     return render_to_response('wiki_display_history.html',
                               {
@@ -217,9 +217,11 @@ def attach (request, page_url):
 
             message = 'File uploaded successfully.'
 
-    can_attach = page.last_revision.wiki_page.can_attach_files(user)
-    can_edit = page.last_revision.can_edit(user)
-    can_view = page.last_revision.can_view(user)
+    # Wtf isn't page.last_revision().wiki_page = page ?
+    # can_attach = page.last_revision().wiki_page.can_attach_files(user)
+    can_attach = page.can_attach_files(user)
+    can_edit = page.last_revision().can_edit(user)
+    can_view = page.last_revision().can_view(user)
 
     return render_to_response('wiki/attach.html',
                               {
@@ -243,9 +245,11 @@ def attachments (request, page_url):
     page = get_object_or_404(WikiPage, url = page_url)
     attachments = WikiAttachment.objects.filter(wiki_page=page)
 
-    can_attach = page.last_revision.wiki_page.can_attach_files(user)
-    can_edit = page.last_revision.can_edit(user)
-    can_view = page.last_revision.can_view(user)
+    # Wtf isn't page.last_revision().wiki_page = page ?
+    # can_attach = page.last_revision().wiki_page.can_attach_files(user)
+    can_attach = page.can_attach_files(user)
+    can_edit = page.last_revision().can_edit(user)
+    can_view = page.last_revision().can_view(user)
 
     return render_to_response('wiki/attachments.html',
                               {
@@ -355,7 +359,7 @@ def display_page (request, page_url, revision_id = None, widgets = {}):
         return create_wiki_page(request, page_url)
 
     if revision_id is None:    # Viewing the last revision of page
-        revision = page.last_revision
+        revision = page.last_revision()
     else:   # Getting revision by revision_id or none
         revision = get_object_or_404(WikiRevision, wiki_page = page, revision_id = revision_id)
 

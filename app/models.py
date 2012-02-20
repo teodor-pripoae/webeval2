@@ -205,7 +205,7 @@ class Problem (models.Model):
         return self.name
 
     def can_view (self, user):
-        return self.wiki_page.last_revision.can_view(user)
+        return self.wiki_page.last_revision().can_view(user)
 
     def get_contests (self):
         return self.contest_set.filter(start_time__lte = datetime.datetime.now(), end_time__gte = datetime.datetime.now())
@@ -353,13 +353,16 @@ class UserValidationKey(models.Model):
 class WikiPage (models.Model):
     author = models.ForeignKey(UserProfile)
     url = models.CharField(max_length=128, unique=True, blank = True)
-    last_revision = models.ForeignKey("WikiRevision", default = None, null = True, blank = True)
 
     def __unicode__ (self):
         return self.url
 
     # This function checks if this user can attach files to this page
     # He can attach files if the wikipage is public, he owns it, or he has permission
+
+    def last_revision(self):
+        return self.wikirevision_set.all().order_by("-revision_id")[0]
+
     def can_attach_files (self, user):
         return user is not None and ((user.has_perm(WIKI_ATTACH_OWN) and user == self.author ) or
                                      (user.has_perm(WIKI_ATTACH_ALL)))

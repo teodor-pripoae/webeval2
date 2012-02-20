@@ -61,7 +61,6 @@ class Command(BaseCommand):
                 This is the contest that just created problems are connected to.
             """ % 'None'
             default_contest__wiki_first_revision.save()
-            default_contest__wiki_page.last_revision = default_contest__wiki_first_revision
             default_contest__wiki_page.save()
 
             default_contest.name = 'Default'

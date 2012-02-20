@@ -297,7 +297,7 @@ def display_problem (request, problem_code):
     user = user_auth (request)
     problem = get_object_or_404 (Problem, code = problem_code)
 
-    return display_revision(revision = problem.wiki_page.last_revision,
+    return display_revision(revision = problem.wiki_page.last_revision(),
                             user = user,
                             widgets = {
                                             'is_problem' : True,
@@ -313,7 +313,7 @@ def display_contest (request, contest_code):
     user = user_auth (request)
     contest = get_object_or_404 (Contest, code = contest_code)
 
-    return display_revision(revision = contest.wiki_page.last_revision,
+    return display_revision(revision = contest.wiki_page.last_revision(),
                             user = user,
                             widgets = {
                                             'is_contest' : True,
