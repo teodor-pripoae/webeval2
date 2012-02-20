@@ -142,15 +142,15 @@
 - fields: {app_label: djcelery, model: workerstate, name: worker}
   model: contenttypes.contenttype
   pk: 19
-- fields: {expire_date: !!timestamp '2012-03-03 22:23:46.951630', session_data: 'MTUwMGNkNTg5MTQ4NjE2YzE5YzBiYWZkZGExNzQyYjIzMDgxOTBkMzqAAn1xAShVEl9hdXRoX3Vz
+- fields: {expire_date: !!timestamp '2012-03-05 11:28:55.479476', session_data: 'NWM1NjE2ODg2MmRmZjIwODUyM2QxYWQzZDExNmY5ZDM2NzA4MmEwMzqAAn1xAShVEl9hdXRoX3Vz
 
       ZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED
 
-      VQ1fYXV0aF91c2VyX2lkcQRLA3Uu
+      VQ1fYXV0aF91c2VyX2lkcQRLAnUu
 
       '}
   model: sessions.session
-  pk: d816a30fc427e75ef8f2081a387c9444
+  pk: 9f59751a851647ace2e0641c3cea8571
 - fields: {domain: example.com, name: example.com}
   model: sites.site
   pk: 1
@@ -164,6 +164,9 @@
 - fields: {app_name: api, applied: !!timestamp '2012-02-18 19:06:55.235816', migration: 0001_initial}
   model: south.migrationhistory
   pk: 3
+- fields: {app_name: app, applied: !!timestamp '2012-02-18 20:35:06.675032', migration: 0002_auto__del_field_wikipage_last_revision}
+  model: south.migrationhistory
+  pk: 4
 - fields:
     author: 1
     content: You have successfully installed webEval.
@@ -237,37 +240,37 @@
     wiki_page: 2
   model: app.problem
   pk: 1
-- fields: {author: 1, last_revision: 1, url: contest/default}
+- fields: {author: 1, url: contest/default}
   model: app.wikipage
   pk: 1
-- fields: {author: 1, last_revision: 2, url: problem/adunare}
+- fields: {author: 1, url: problem/adunare}
   model: app.wikipage
   pk: 2
-- fields: {author: 1, last_revision: 3, url: contest/archive}
+- fields: {author: 1, url: contest/archive}
   model: app.wikipage
   pk: 3
-- fields: {author: 1, last_revision: 4, url: contest/training}
+- fields: {author: 1, url: contest/training}
   model: app.wikipage
   pk: 4
-- fields: {author: 1, last_revision: 5, url: about}
+- fields: {author: 1, url: about}
   model: app.wikipage
   pk: 5
-- fields: {author: 1, last_revision: 6, url: docs}
+- fields: {author: 1, url: docs}
   model: app.wikipage
   pk: 6
-- fields: {author: 1, last_revision: 7, url: licence}
+- fields: {author: 1, url: licence}
   model: app.wikipage
   pk: 7
-- fields: {author: 1, last_revision: 8, url: faq}
+- fields: {author: 1, url: faq}
   model: app.wikipage
   pk: 8
-- fields: {author: 1, last_revision: 1, url: /user/bossul}
+- fields: {author: 1, url: /user/bossul}
   model: app.wikipage
   pk: 9
-- fields: {author: 2, last_revision: 9, url: /user/toni}
+- fields: {author: 2, url: /user/toni}
   model: app.wikipage
   pk: 10
-- fields: {author: 3, last_revision: 10, url: /user/hadesgames}
+- fields: {author: 3, url: /user/hadesgames}
   model: app.wikipage
   pk: 11
 - fields: {author: 1, content: Pagina lu Bossu, date: !!timestamp '2012-02-18 21:36:52.262752',
@@ -832,7 +835,7 @@
     is_active: true
     is_staff: false
     is_superuser: true
-    last_login: 2012-02-18 21:15:52.911443
+    last_login: 2012-02-20 11:28:55.474594
     last_name: ''
     password: sha1$f0c07$29e96a5a5be50c02b16d79bd9cb39d7ae7b942d8
     user_permissions: []
@@ -866,7 +869,7 @@
     reputation: 0
     twitter_user: null
     user_permissions: []
-    wiki_page: null
+    wiki_page: 9
   model: app.userprofile
   pk: 1
 - fields:
@@ -881,7 +884,7 @@
     reputation: 0
     twitter_user: null
     user_permissions: []
-    wiki_page: null
+    wiki_page: 10
   model: app.userprofile
   pk: 2
 - fields:
@@ -896,6 +899,6 @@
     reputation: 0
     twitter_user: null
     user_permissions: []
-    wiki_page: null
+    wiki_page: 11
   model: app.userprofile
   pk: 3
