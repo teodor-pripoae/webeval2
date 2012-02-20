@@ -41,7 +41,6 @@ Write ... to output file //%s.out//.
     r.author = user
     r.save()
 
-    w.last_revision = r
     w.save()
 
     return w
@@ -69,7 +68,6 @@ Write here about you...
     r.author = user
     r.save()
 
-    w.last_revision = r
     w.save()
 
     return w
@@ -99,7 +97,6 @@ Write here about contest %s...
     r.author = user
     r.save()
 
-    w.last_revision = r
     w.save()
 
     return w

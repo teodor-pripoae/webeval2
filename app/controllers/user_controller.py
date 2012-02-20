@@ -18,7 +18,7 @@ def display_user (request, user_name):
     user = user_auth(request)
     user_profile = get_object_or_404(UserProfile, username=user_name)
 
-    return display_revision(revision = user_profile.wiki_page.last_revision,
+    return display_revision(revision = user_profile.wiki_page.last_revision(),
                             user = user,
                             widgets = {
                                 'is_user' : True,
