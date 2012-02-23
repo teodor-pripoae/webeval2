@@ -18,3 +18,4 @@ django-simple-captcha
 django-nose
 pil
 simplejson
+pyyaml
