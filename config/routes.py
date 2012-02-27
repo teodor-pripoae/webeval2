@@ -15,7 +15,7 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     #(r'^admin/', include(admin.site.urls)),
-    url(r'^api/', include('api.urls')),
+    url(r'^api/', include('app.api.urls')),
 
     url(r'^$', 'app.controllers.wiki_controller.dashboard', name="dashboard"),
 
