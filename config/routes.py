@@ -69,12 +69,12 @@ urlpatterns = patterns('',
 
     url(r'^submit/$', 'app.controllers.grader_controller.submit', name="submit_source"),
 
-    url(r'^tickets/$', 'app.controllers.utils_controller.tickets', name="tickets"),
-    url(r'^tickets/new/$', 'app.controllers.utils_controller.new_ticket', name="new_ticket"),
-    url(r"^tickets/(?P<ticket_id>\d+)/delete_comment/$", "app.controllers.utils_controller.delete_comment", name="delete_ticket_comment"),
-    url(r"^tickets/(?P<ticket_id>\d+)/delete_comment/(?P<comment_id>\d+)/$", "app.controllers.utils_controller.delete_comment", name="delete_ticket_comment"),
-    url(r'^ticket/(?P<ticket_id>\d+)/$', 'app.controllers.utils_controller.display_ticket', name="display_ticket"),
-    url(r'^ticket/(?P<ticket_id>\d+)/edit/$', 'app.controllers.utils_controller.edit_ticket', name="edit_ticket"),
+    url(r'^tickets/$', 'app.controllers.tickets_controller.tickets', name="tickets"),
+    url(r'^tickets/new/$', 'app.controllers.tickets_controller.new_ticket', name="new_ticket"),
+    url(r"^tickets/(?P<ticket_id>\d+)/delete_comment/$", "app.controllers.tickets_controller.delete_comment", name="delete_ticket_comment"),
+    url(r"^tickets/(?P<ticket_id>\d+)/delete_comment/(?P<comment_id>\d+)/$", "app.controllers.tickets_controller.delete_comment", name="delete_ticket_comment"),
+    url(r'^ticket/(?P<ticket_id>\d+)/$', 'app.controllers.tickets_controller.display_ticket', name="display_ticket"),
+    url(r'^ticket/(?P<ticket_id>\d+)/edit/$', 'app.controllers.tickets_controller.edit_ticket', name="edit_ticket"),
 
     url(r'^captcha/', include('captcha.urls')),
     url(r'^auth/successful-login/$', 'app.controllers.auth_controller.successful_login', name="successful_login"),
