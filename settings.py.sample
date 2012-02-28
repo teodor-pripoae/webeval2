@@ -128,7 +128,6 @@ INSTALLED_APPS = (
     'django_nose',
     'annoying',
     'app',
-    'api',
 )
 
 NOSE_ARGS = ['-v', '--with-snot', '-s']
