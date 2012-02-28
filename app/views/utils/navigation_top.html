@@ -18,4 +18,9 @@
     <a href="{% url admin_page %}">Admin</a>
   </li>
 {% endif %}
+{% if request.user.userprofile.developer %}
+  <li {% if navigation.main == "tickets" %}class="active"{% endif %}>
+    <a href="{% url tickets %}">Tickets</a>
+  </li>
+{% endif %}
 
