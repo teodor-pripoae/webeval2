@@ -1,4 +1,4 @@
-django
+django==1.2
 versiontools
 south
 python-openid
@@ -19,3 +19,5 @@ django-nose
 pil
 simplejson
 pyyaml
+mysql-python
+python-dateutil
